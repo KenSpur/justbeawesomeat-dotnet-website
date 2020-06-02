@@ -1,0 +1,17 @@
+﻿@using Application.Shared.AboutMePage
+    <ul class="social-links">
+        @foreach (var link in Collection)
+        {
+            <li>
+                <a class="tip social-button" href="@link.Url" target="_blank" title="@link.Title">
+                    <i class="@link.IconClass"></i>
+                </a>
+            </li>
+        }
+    </ul>
+
+@code 
+{
+    [Parameter]
+    public ICollection<SocialLink> Collection { get; set; }
+}

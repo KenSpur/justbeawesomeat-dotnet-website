@@ -1,0 +1,27 @@
+﻿@using Application.Shared.AboutMePage
+<!-- Services block -->
+<div class="block-title">
+    <h3>Services</h3>
+</div>
+
+<div class="row">
+    @foreach (var service in Collection)
+    {
+        <div class="col-sm-6 col-md-3 subpage-block">
+            <div class="service-block">
+                <div class="service-info">
+                    <i class="service-icon @service.IconClass"></i>
+                    <h4>@service.Title</h4>
+                    <p>@service.Description</p>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+<!-- End of Services block -->
+
+@code
+{
+    [Parameter]
+    public ICollection<Service> Collection { get; set; } = new List<Service>();
+}

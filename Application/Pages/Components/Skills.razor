@@ -1,0 +1,20 @@
+﻿@using Application.Shared.ResumePage
+
+<div class="block-title">
+    <h3>@Title</h3>
+</div>
+<div class="skills-info">
+    @foreach (var skill in Collection)
+    {
+        <h4>@skill.Title</h4>
+        <div class="skill-container">
+            <div class="skill-percentage skill-1"></div>
+        </div>
+    }
+</div>
+
+@code
+{
+    [Parameter] public string Title { get; set; }
+    [Parameter] public ICollection<Skill> Collection { get; set; }
+}

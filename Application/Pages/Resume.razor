@@ -1,0 +1,61 @@
+﻿@page "/Resume"
+@using Application.Client.Repositories
+@using Application.Client.Services
+
+<section id="testId" class="pt-page pt-page-current pt-page-moveFromLeft" data-id="resume">
+    <div class="border-block-top-110"></div>
+    <div class="section-inner">
+        <div class="section-title-block">
+            <div class="section-title-wrapper">
+                <h2 class="section-title">Resume</h2>
+                <h5 class="section-description">@Model.YearsOfExperience Years of Experience</h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 col-md-8 subpage-block">
+                <Experiences Collection="@Model.Experiences" />
+            </div>
+            <div class="col-sm-6 col-md-4 subpage-block">
+                @foreach (var skills in Model.SkillsCollection)
+                {
+                    <Skills Title="@skills.Title" Collection="@skills.Collection" />
+                }
+                <IndustryKnowledge Collection="@Model.IndustryKnowledge" />
+                <Certifications Collection="@Model.Certifications" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 col-md-12">
+                @*<div class="download-cv-block">
+                    <a class="button" target="_blank" href="#">Download CV</a>
+                </div>*@
+            </div>
+        </div>
+    </div>
+</section>
+
+@code
+{
+    [Inject] public IJSRuntime Js { get; set; }
+    [Inject] public INavigationService NavigationService { get; set; }
+    [Inject] public IResumePageDataRepository Repository { get; set; }
+
+    public Application.Shared.ResumePage.Resume Model { get; set; } = new Application.Shared.ResumePage.Resume();
+
+    protected override async Task OnInitializedAsync()
+    {
+        NavigationService.AnimatePageRemovalAsync = AnimatePageRemovalAsync;
+
+        Model = await Repository.GetResumeAsync();
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+        => await Js.InvokeVoidAsync("window.initResume");
+
+    public async Task AnimatePageRemovalAsync()
+    {
+        await Js.InvokeVoidAsync("testAnimationFunction", 18);
+
+        await Task.Delay(300);
+    }
+}

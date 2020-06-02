@@ -1,0 +1,22 @@
+﻿@using Application.Shared.AboutMePage
+<div class="block-title">
+    <h3>Fun Facts</h3>
+</div>
+<div class="row">
+    @foreach (var funFact in Collection)
+    {
+        <div class="col-sm-6 col-md-3 subpage-block">
+            <div class="fun-fact-block gray-bg tilt-effect">
+                <i class="@funFact.IconClass"></i>
+                <h4>@funFact.Title</h4>
+                <span class="fun-value">@funFact.Value</span>
+            </div>
+        </div>
+    }
+</div>
+
+@code
+{
+    [Parameter]
+    public ICollection<FunFact> Collection { get; set; } = new List<FunFact>();
+}

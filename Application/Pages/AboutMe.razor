@@ -1,0 +1,69 @@
+﻿@page "/AboutMe"
+@using Application.Client.Repositories
+@using Application.Client.Services
+
+<section id="testId" class="pt-page pt-page-current pt-page-moveFromRight" data-id="about_me">
+    <div class="border-block-top-110"></div>
+    <div class="section-inner">
+        <div class="section-title-block">
+            <div class="section-title-wrapper clearfix">
+                <h2 class="section-title">About Me</h2>
+                <h5 class="section-description">@Model.Keywords</h5>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6 col-md-6 col-lg-4 subpage-block">
+                <div class="my-photo-block tilt-effect">
+                    <img src="@Model.ImageSource" alt="me">
+                </div>
+            </div>
+
+            <div class="col-sm-6 col-md-6 col-lg-4">
+                <h3>@Model.Title</h3>
+                <p>@Model.Description</p>
+                <p><b>Future ambitions:</b></p>
+                <p><i>@Model.FutureAmbitions</i></p>
+            </div>
+
+            <div class="col-sm-6 col-md-6 col-lg-4 subpage-block">
+
+                <AboutMeInfo Info="@Model.Info"/>
+
+                <SocialLinks Collection="@Model.SocialLinks"/>
+
+            </div>
+        </div>
+
+        <Services Collection="@Model.Services"/>
+        
+        <FunFacts Collection="@Model.FunFacts"/>
+
+    </div>
+</section>
+
+@code
+{
+    [Inject] public INavigationService NavigationService { get; set; }
+    [Inject] public IJSRuntime Js { get; set; }
+    [Inject] public IAboutMePageDataRepository Repository { get; set; }
+
+    public Application.Shared.AboutMePage.AboutMe Model { get; set; } = new Application.Shared.AboutMePage.AboutMe();
+
+    protected override async Task OnInitializedAsync()
+    {
+        NavigationService.AnimatePageRemovalAsync = AnimatePageRemovalAsync;
+
+        Model = await Repository.GetAboutMeAsync();
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+        => await Js.InvokeVoidAsync("window.initAboutMe");
+
+    private async Task AnimatePageRemovalAsync()
+    {
+        await Js.InvokeVoidAsync("testAnimationFunction", 17);
+
+        await Task.Delay(300);
+    }
+}
