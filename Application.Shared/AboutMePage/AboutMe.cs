@@ -22,6 +22,8 @@ namespace Application.Shared.AboutMePage
         public ICollection<SocialLink> SocialLinks { get; set; } = new List<SocialLink>();
         [JsonPropertyName("services")]
         public ICollection<Service> Services { get; set; } = new List<Service>();
+        [JsonPropertyName("testimonials")]
+        public ICollection<Testimonial> Testimonials { get; set; } = new List<Testimonial>();
         [JsonPropertyName("fun_facts")]
         public ICollection<FunFact> FunFacts { get; set; } = new List<FunFact>();
     }
