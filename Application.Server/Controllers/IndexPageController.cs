@@ -14,7 +14,7 @@ namespace Application.Server.Controllers
             {
                 FirstName = "Ken",
                 LastName = "Spur",
-                Items = new [] { "Full Stack .Net Web/Cloud Developer", "C# Specialist", "DevOps engineer" }
+                Items = new [] { ".Net Consulting", "Full stack Web Development", "Full stack Cloud Development", "DevOps Engineering" }
             });
         }
     }
