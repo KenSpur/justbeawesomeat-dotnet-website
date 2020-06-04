@@ -97,18 +97,6 @@ namespace Application.Server.Controllers
                 {
                     new FunFact
                     {
-                        IconClass = "pe-7s-icon pe-7s-notebook",
-                        Title = "Books read",
-                        Value = "121"
-                    },
-                    new FunFact
-                    {
-                        IconClass = "pe-7s-icon pe-7s-next",
-                        Title = "Pluralsight courses consumed",
-                        Value = "205"
-                    },
-                    new FunFact
-                    {
                         IconClass = "pe-7s-icon pe-7s-monitor",
                         Title = "Started coding journey since",
                         Value = "2007"
@@ -118,6 +106,18 @@ namespace Application.Server.Controllers
                         IconClass = "pe-7s-icon pe-7s-coffee",
                         Title = "Coffee Consumed",
                         Value = "∞"
+                    },
+                    new FunFact
+                    {
+                        IconClass = "pe-7s-icon pe-7s-next",
+                        Title = "Pluralsight courses consumed",
+                        Value = "205"
+                    },
+                    new FunFact
+                    {
+                        IconClass = "pe-7s-icon pe-7s-notebook",
+                        Title = "Books read",
+                        Value = "121"
                     }
                 }
             });
