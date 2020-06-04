@@ -1,11 +1,11 @@
 ﻿@using Application.Shared.AboutMePage
-<!-- Services block -->
+
 <div class="block-title">
     <h3>Services</h3>
 </div>
 
 <div class="row">
-    @foreach (var service in Collection)
+    @foreach (var service in Services)
     {
         <div class="col-sm-6 col-md-3 subpage-block">
             <div class="service-block">
@@ -18,10 +18,9 @@
         </div>
     }
 </div>
-<!-- End of Services block -->
 
 @code
 {
     [Parameter]
-    public ICollection<Service> Collection { get; set; } = new List<Service>();
+    public ICollection<Service> Services { get; set; } = new List<Service>();
 }

@@ -3,7 +3,7 @@
 </div>
 
 <ul class="tags">
-    @foreach (var item in Collection)
+    @foreach (var item in IndustryKnowledge)
     {
         <li><a>@item</a></li>
     }
@@ -11,5 +11,5 @@
 
 @code
 {
-    [Parameter] public ICollection<string> Collection { get; set; } = new List<string>();
+    [Parameter] public ICollection<string> IndustryKnowledge { get; set; } = new List<string>();
 }

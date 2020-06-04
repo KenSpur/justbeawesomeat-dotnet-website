@@ -1,6 +1,6 @@
 ﻿@using Application.Shared.AboutMePage
     <ul class="social-links">
-        @foreach (var link in Collection)
+        @foreach (var link in Links)
         {
             <li>
                 <a class="tip social-button" href="@link.Url" target="_blank" title="@link.Title">
@@ -13,5 +13,5 @@
 @code 
 {
     [Parameter]
-    public ICollection<SocialLink> Collection { get; set; }
+    public ICollection<SocialLink> Links { get; set; }
 }

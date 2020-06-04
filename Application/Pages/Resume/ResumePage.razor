@@ -1,6 +1,7 @@
 ﻿@page "/Resume"
 @using Application.Client.Repositories
 @using Application.Client.Services
+@using Application.Shared.ResumePage
 
 <section id="testId" class="pt-page pt-page-current pt-page-moveFromLeft" data-id="resume">
     <div class="border-block-top-110"></div>
@@ -8,20 +9,20 @@
         <div class="section-title-block">
             <div class="section-title-wrapper">
                 <h2 class="section-title">Resume</h2>
-                <h5 class="section-description">@Model.YearsOfExperience Years of Experience</h5>
+                <h5 class="section-description">@Resume.YearsOfExperience Years of Experience</h5>
             </div>
         </div>
         <div class="row">
             <div class="col-sm-12 col-md-8 subpage-block">
-                <Experiences Collection="@Model.Experiences" />
+                <ExperiencesBlock Experiences="@Resume.Experiences" />
             </div>
             <div class="col-sm-6 col-md-4 subpage-block">
-                @foreach (var skills in Model.SkillsCollection)
+                @foreach (var skills in Resume.SkillsCollection)
                 {
-                    <Skills Title="@skills.Title" Collection="@skills.Collection" />
+                    <SkillsBlock Title="@skills.Title" Skills="@skills.Collection" />
                 }
-                <IndustryKnowledge Collection="@Model.IndustryKnowledge" />
-                <Certifications Collection="@Model.Certifications" />
+                <IndustryKnowledgeBlock IndustryKnowledge="@Resume.IndustryKnowledge" />
+                <CertificationsBlock Certifications="@Resume.Certifications" />
             </div>
         </div>
         <div class="row">
@@ -40,13 +41,13 @@
     [Inject] public INavigationService NavigationService { get; set; }
     [Inject] public IResumePageDataRepository Repository { get; set; }
 
-    public Application.Shared.ResumePage.Resume Model { get; set; } = new Application.Shared.ResumePage.Resume();
+    public Resume Resume { get; set; } = new Resume();
 
     protected override async Task OnInitializedAsync()
     {
         NavigationService.AnimatePageRemovalAsync = AnimatePageRemovalAsync;
 
-        Model = await Repository.GetResumeAsync();
+        Resume = await Repository.GetResumeAsync();
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
