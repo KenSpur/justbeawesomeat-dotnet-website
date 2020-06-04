@@ -254,31 +254,100 @@ namespace Application.Server.Controllers
                         {
                             new Skill
                             {
-                                Title = "C#"
+                                Title = "C#",
+                                Percentage = 90
                             },
                             new Skill
                             {
-                                Title = ".Net Framework"
+                                Title = ".Net Core",
+                                Percentage = 90
                             },
                             new Skill
                             {
-                                Title = ".Net Core"
+                                Title = ".Net Framework",
+                                Percentage = 85
                             },
                             new Skill
                             {
-                                Title = "Blazor"
+                                Title = "Asp.Net",
+                                Percentage = 90
                             },
                             new Skill
                             {
-                                Title = "Git"
+                                Title = "Blazor",
+                                Percentage = 80
                             },
                             new Skill
                             {
-                                Title = "Azure"
+                                Title = "T-SQL",
+                                Percentage = 85
                             },
                             new Skill
                             {
-                                Title = "Azure DevOps"
+                                Title = "PowerShell",
+                                Percentage = 60
+                            },
+                            new Skill
+                            {
+                                Title = "Git",
+                                Percentage = 75
+                            },
+                            new Skill
+                            {
+                                Title = "Azure PaaS",
+                                Percentage = 80
+                            },
+                            new Skill
+                            {
+                                Title = "Azure IaaS",
+                                Percentage = 50
+                            },
+                            new Skill
+                            {
+                                Title = "Azure DevOps",
+                                Percentage = 80
+                            }
+                        }
+                    },
+                    new Skills
+                    {
+                        Title = "Other Skills",
+                        Collection = new List<Skill>
+                        {
+                            new Skill
+                            {
+                                Title = "HTML",
+                                Percentage = 80
+                            },
+                            new Skill
+                            {
+                                Title = "CSS",
+                                Percentage = 60
+                            },
+                            new Skill
+                            {
+                                Title = "JavaScript",
+                                Percentage = 70
+                            },
+                            new Skill
+                            {
+                                Title = "TypeScript",
+                                Percentage = 70
+                            },
+                            new Skill
+                            {
+                                Title = "jQuery",
+                                Percentage = 70
+                            },
+                            new Skill
+                            {
+                                Title = "Angular",
+                                Percentage = 65
+                            },
+                            new Skill
+                            {
+                                Title = "Xamarin Forms",
+                                Percentage = 75
                             }
                         }
                     },
