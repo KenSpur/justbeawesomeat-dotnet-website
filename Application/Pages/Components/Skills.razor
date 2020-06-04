@@ -8,7 +8,7 @@
     {
         <h4>@skill.Title</h4>
         <div class="skill-container">
-            <div class="skill-percentage skill-1"></div>
+            <div class="skill-percentage" style=" width: @(ShowPercentage? skill.Percentage : 0)%"></div>
         </div>
     }
 </div>
@@ -17,4 +17,18 @@
 {
     [Parameter] public string Title { get; set; }
     [Parameter] public ICollection<Skill> Collection { get; set; }
+
+    public bool ShowPercentage { get; set; } = false;
+
+    protected override void OnInitialized()
+        => StartShowPercentageAnimation();
+
+    public async void StartShowPercentageAnimation()
+    {
+        await Task.Delay(1);
+
+        ShowPercentage = true;
+
+        StateHasChanged();
+    }
 }
