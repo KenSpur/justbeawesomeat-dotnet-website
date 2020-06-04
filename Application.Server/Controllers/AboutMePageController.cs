@@ -93,6 +93,21 @@ namespace Application.Server.Controllers
                         IconClass = "pe-7s-icon pe-7s-loop"
                     },
                 },
+                Testimonials = new List<Testimonial>
+                {
+                    new Testimonial
+                    {
+                        Text = "Place holder text",
+                        Author = "FirstName LastName",
+                        Firm = "CompanyName"
+                    },
+                    new Testimonial
+                    {
+                        Text = "Place holder text",
+                        Author = "FirstName LastName",
+                        Firm = "CompanyName"
+                    }
+                },
                 FunFacts = new List<FunFact>
                 {
                     new FunFact
