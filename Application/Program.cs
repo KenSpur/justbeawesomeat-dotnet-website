@@ -29,6 +29,7 @@ namespace Application.Client
             builder.Services.AddTransient<IIndexPageDataRepository, IndexPageDataRepository>();
             builder.Services.AddTransient<IAboutMePageDataRepository, AboutMePageDataRepository>();
             builder.Services.AddTransient<IResumePageDataRepository, ResumePageDataRepository>();
+            builder.Services.AddTransient<IContactPageDataRepository, ContactPageDataRepository>();
 
             await builder.Build().RunAsync();
         }

@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="3.2.0" />
+    <PackageReference Include="SendGrid" Version="9.15.1" />
   </ItemGroup>
 
   <ItemGroup>
