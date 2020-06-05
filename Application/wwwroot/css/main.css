@@ -182,24 +182,24 @@ input[type=submit]:hover, input[type=submit]:focus, input[type=button]:focus, bu
 
 .form-control,
 .form-control:focus,
-.has-error .form-control,
-.has-error .form-control:focus {
-  position: relative;
-  border: 1px solid #bbb;
-  border-radius: 0;
-  display: block;
-  font-size: 0.9em;
-  margin: 0;
-  padding: 10px 35px 10px 12px;
-  width: 100%;
-  background: 0 0;
-  text-align: left;
-  color: inherit;
-  -webkit-box-shadow: none;
-  -moz-box-shadow: none;
-  box-shadow: none;
-  outline: none;
-  font-family: 'PT Sans', Helvetica, sans-serif;
+.invalid .form-control,
+.invalid .form-control:focus {
+    position: relative;
+    border: 1px solid #bbb;
+    border-radius: 0;
+    display: block;
+    font-size: 0.9em;
+    margin: 0;
+    padding: 10px 35px 10px 12px;
+    width: 100%;
+    background: 0 0;
+    text-align: left;
+    color: inherit;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    outline: none;
+    font-family: 'PT Sans', Helvetica, sans-serif;
 }
 
 textarea.form-control, textarea.form-control:focus {
@@ -228,7 +228,7 @@ textarea.form-control, textarea.form-control:focus {
   z-index: 1;
 }
 
-.has-error .form-control + .form-control-border {
+.invalid .form-control + .form-control-border {
   background: #ff4c4c;
 }
 
@@ -258,26 +258,26 @@ textarea.form-control, textarea.form-control:focus {
 }
 /* /Placeholders */
 
-.form-group .help-block {
-  position: absolute;
-  display: inline-block;
-  padding: 0px 5px;
-  font-size: 0.8em;
-  line-height: 1.5em;
-  margin: -2px 0 0 10px;
-  color: #fff;
-  background: #ff4c4c;
+.form-group .validation-message {
+    position: absolute;
+    display: inline-block;
+    padding: 0px 5px;
+    font-size: 0.8em;
+    line-height: 1.5em;
+    margin: -2px 0 0 10px;
+    color: #fff;
+    background: #ff4c4c;
 }
 
-.form-group .help-block:after {
-  content: " ";
-  position: absolute;
-  left: 5px;
-  bottom: 100%;
-  width: 0;
-  height: 0;
-  border-bottom: 10px solid #ff4c4c;
-  border-right: 10px solid transparent;
+.form-group .validation-message:after {
+    content: " ";
+    position: absolute;
+    left: 5px;
+    bottom: 100%;
+    width: 0;
+    height: 0;
+    border-bottom: 10px solid #ff4c4c;
+    border-right: 10px solid transparent;
 }
 .form-group .help-block:empty {
   display: none;
