@@ -57,7 +57,7 @@ namespace Application.Server.Controllers
             //msg.AddContent(MimeType.Text, message.Text);
 
             //await new SendGridClient("").SendEmailAsync(msg);
-
+            await Task.Delay(1000);
             return Ok();
         }
     }

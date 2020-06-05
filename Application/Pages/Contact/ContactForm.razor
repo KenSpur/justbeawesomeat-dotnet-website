@@ -1,4 +1,5 @@
 ﻿@using Application.Client.Repositories
+@using Application.Client.Services
 @using Application.Shared.ContactPage
 
 <div class="block-title">
@@ -32,14 +33,14 @@
             <ValidationMessage class="help-block with-errors" For="() => Message.Text" />
         </div>
 
-        @* <div class="alert alert-success alert-dismissable "><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>' + messageText + '</div> *@
-
         <input type="submit" class="button btn-send" value="Send message">
     </div>
 </EditForm>
 
 @code
 {
+    [Inject] public IJSRuntime Js { get; set; }
+    [Inject] public INavigationService NavigationService { get; set; }
     [Inject] public IContactPageDataRepository Repository { get; set; }
 
     public Message Message { get; set; } = new Message();
@@ -47,5 +48,9 @@
     private async Task OnValidSubmitAsync()
     {
         await Repository.AddMessageAsync(Message);
+
+        await Js.InvokeVoidAsync("window.notify");
+
+        await NavigationService.NavigateToNextPageAsync();
     }
 }

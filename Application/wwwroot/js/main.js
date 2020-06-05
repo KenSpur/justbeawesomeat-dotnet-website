@@ -283,6 +283,31 @@
         // /Contact form validator
     };
 
+    window.notify = function() {
+        $.notify({
+            icon: "fa fa-envelope-o",
+            title: "Message",
+            message: " successfully send, Thanks!"
+        },{
+            offset: 20,
+            placement: {
+                from: "top",
+                align: "center"
+            },
+            animate: {
+                enter: 'animated bounceInDown',
+                exit: 'animated bounceOutUp'
+            },
+            icon_type: 'class',
+            template: '<div data-notify="container" class="col-xs-11 col-sm-3 alert alert-{0}" role="alert" style="background-color: #555; border-color: #444;" >' +
+                        '<button type="button" aria-hidden="true" class="close" data-notify="dismiss">x</button>' +
+                        '<span data-notify="icon" style="color: #fd9129" ></span> ' +
+                        '<span data-notify="title" style="color: #ddd" >{1}</span> ' +
+                        '<span data-notify="message" style="color: #fff" >{2}</span>' +
+                    '</div>' 
+        });
+    };
+
 })(jQuery);
 
 function testAnimationFunction(selectedAnimNumber) {
