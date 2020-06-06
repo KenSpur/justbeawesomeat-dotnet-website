@@ -9,7 +9,7 @@ namespace Application.Shared
         [JsonPropertyName("last_name")]
         public string LastName { get; set; }
 
-        [JsonIgnore] 
+        [JsonIgnore]
         public string FullName => $"{FirstName} {LastName}";
     }
 }

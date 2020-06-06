@@ -1,9 +1,9 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Routing;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Routing;
 
 namespace Application.Client.Services.Implementation
 {
@@ -68,6 +68,6 @@ namespace Application.Client.Services.Implementation
 
         private void _navigationManager_LocationChanged(object sender, LocationChangedEventArgs e)
             => _currentPage = e.Location.Split('/').Last();
-        
+
     }
 }

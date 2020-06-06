@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using Application.Server.Options;
+﻿using Application.Server.Options;
 using Application.Shared.ContactPage;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using SendGrid;
 using SendGrid.Helpers.Mail;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Application.Server.Controllers
 {
@@ -51,7 +51,7 @@ namespace Application.Server.Controllers
         [HttpPost("message")]
         public async Task<IActionResult> PostMessage([FromBody] Message message)
         {
-            var msg =  new SendGridMessage();
+            var msg = new SendGridMessage();
 
             msg.SetFrom(new EmailAddress(message.Email, message.Name));
 

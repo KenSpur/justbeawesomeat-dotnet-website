@@ -12,7 +12,7 @@ namespace Application.Shared.IndexPage
         [JsonPropertyName("items")]
         public ICollection<string> Items { get; set; } = new List<string>();
 
-        [JsonIgnore] 
+        [JsonIgnore]
         public string FullName => $"{FirstName} {LastName}";
     }
 }

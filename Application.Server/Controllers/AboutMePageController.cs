@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
-using Application.Shared.AboutMePage;
+﻿using Application.Shared.AboutMePage;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 
 namespace Application.Server.Controllers
 {

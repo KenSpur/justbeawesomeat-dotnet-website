@@ -1,7 +1,7 @@
-﻿using System.Net.Http;
+﻿using Application.Shared.ResumePage;
+using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
-using Application.Shared.ResumePage;
 
 namespace Application.Client.Repositories.Implementation
 {

@@ -10,7 +10,7 @@ namespace Application.Server.Controllers
         [HttpGet("name")]
         public IActionResult GetName()
         {
-            return Ok(new Name { FirstName = "Ken", LastName = "Spur"});
+            return Ok(new Name { FirstName = "Ken", LastName = "Spur" });
         }
     }
 }

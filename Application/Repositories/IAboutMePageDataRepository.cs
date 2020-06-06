@@ -1,5 +1,5 @@
-﻿using System.Threading.Tasks;
-using Application.Shared.AboutMePage;
+﻿using Application.Shared.AboutMePage;
+using System.Threading.Tasks;
 
 namespace Application.Client.Repositories
 {

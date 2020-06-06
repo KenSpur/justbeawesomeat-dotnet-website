@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Application.Shared.ContactPage;
+using System.Collections.Generic;
 using System.Threading.Tasks;
-using Application.Shared.ContactPage;
 
 namespace Application.Client.Repositories
 {

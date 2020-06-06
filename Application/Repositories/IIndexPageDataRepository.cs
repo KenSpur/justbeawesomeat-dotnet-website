@@ -1,5 +1,5 @@
-﻿using System.Threading.Tasks;
-using Application.Shared.IndexPage;
+﻿using Application.Shared.IndexPage;
+using System.Threading.Tasks;
 
 namespace Application.Client.Repositories
 {

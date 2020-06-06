@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Application.Shared.ResumePage;
 using Microsoft.AspNetCore.Mvc;
-using Application.Shared.ResumePage;
+using System.Collections.Generic;
 
 namespace Application.Server.Controllers
 {
@@ -30,7 +30,7 @@ namespace Application.Server.Controllers
                         Authority = "Microsoft",
                         Description = "Microsoft Certified Professional"
                     }
-                }, 
+                },
                 Experiences = new List<Experience>
                 {
                     new Experience
@@ -89,7 +89,7 @@ namespace Application.Server.Controllers
                         Tags = new List<string>
                         {
                             "C#", ".Net Core", "T-SQL", "EF Core", "NuGet", "Topshelf", "Azure DevOps",
-                            "Git", "YAML", "PowerShell", "SFTP", "RabbitMQ", "MS Test", "Visual Studio 2019", 
+                            "Git", "YAML", "PowerShell", "SFTP", "RabbitMQ", "MS Test", "Visual Studio 2019",
                             "VS Code", "Agile", "Scrum"
                         }
                     },
@@ -178,11 +178,11 @@ namespace Application.Server.Controllers
                         Tags = new List<string>
                         {
                             "Xamarin", "XAML", "C#", ".Net Framework", ".Net Core", "HTML",
-                            "CSS", "JavaScript", "Razor", "EF", "EF Core", "T-SQL", "NuGet", 
-                            "Identity Server", "OpenID Connect", "Oath", "Azure Storage", 
+                            "CSS", "JavaScript", "Razor", "EF", "EF Core", "T-SQL", "NuGet",
+                            "Identity Server", "OpenID Connect", "Oath", "Azure Storage",
                             "Azure Functions", "Azure App Services", "Azure container registry",
-                            "Docker", "Azure DevOps", "Git", "YAML", "PowerShell", "App Center", 
-                            "Visual Studio 2017", "VS Code", "Micro service Architecture", "DDD", 
+                            "Docker", "Azure DevOps", "Git", "YAML", "PowerShell", "App Center",
+                            "Visual Studio 2017", "VS Code", "Micro service Architecture", "DDD",
                             "Agile", "Scrum"
                         }
                     },
@@ -200,8 +200,8 @@ namespace Application.Server.Controllers
                         Tags = new List<string>
                         {
                             "C#", ".Net Framework", ".Net Core", "HTML", "CSS", "JavaScript",
-                            "Razor", "EF", "EF Core", "T-SQL", "NuGet", "Identity Server", 
-                            "OpenID Connect", "Oath", "Azure AD", "Azure Service Fabric", 
+                            "Razor", "EF", "EF Core", "T-SQL", "NuGet", "Identity Server",
+                            "OpenID Connect", "Oath", "Azure AD", "Azure Service Fabric",
                             "Azure Service Bus", "Azure DevOps", "Git", "Visual studio 2017",
                             "Micro service Architecture", "DDD", "CQRS", "Agile", "Scrum"
                         }
