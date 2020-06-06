@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Application.Shared.ResumePage;
 
-
 namespace Application.Server.Controllers
 {
     [Route("api/[controller]")]
