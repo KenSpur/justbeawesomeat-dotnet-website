@@ -3,7 +3,7 @@
 @using Application.Client.Services
 @using Application.Shared.IndexPage
 
-<section id="testId" class="pt-page pt-page-1 section-without-bg section-paddings-0 table pt-page-current pt-page-scaleUpDown pt-page-delay300" data-id="home">
+<section id="animatePageRemoval" class="pt-page pt-page-1 section-without-bg section-paddings-0 table pt-page-current pt-page-scaleUpDown pt-page-delay300" data-id="home">
     <div class="section-inner">
         <div class="home-page-block">
             <h2>@Title.FullName</h2>
@@ -44,7 +44,7 @@
 
     private async Task AnimatePageRemovalAsync()
     {
-        await Js.InvokeVoidAsync("testAnimationFunction", 21);
+        await Js.InvokeVoidAsync("window.animatePageRemoval", 21);
 
         await Task.Delay(300);
     }

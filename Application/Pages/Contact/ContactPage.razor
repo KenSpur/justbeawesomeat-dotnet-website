@@ -4,7 +4,7 @@
 @using Application.Shared.ContactPage
 
 <!-- Contact Subpage -->
-<section id="testId" class="pt-page pt-page-current pt-page-moveFromTop" data-id="contact">
+<section id="animatePageRemoval" class="pt-page pt-page-current pt-page-moveFromTop" data-id="contact">
     <div class="border-block-top-110"></div>
     <div class="section-inner">
         <div class="section-title-block">
@@ -52,7 +52,7 @@
 
     private async Task AnimatePageRemovalAsync()
     {
-        await Js.InvokeVoidAsync("testAnimationFunction", 20);
+        await Js.InvokeVoidAsync("window.animatePageRemoval", 20);
 
         await Task.Delay(300);
     }

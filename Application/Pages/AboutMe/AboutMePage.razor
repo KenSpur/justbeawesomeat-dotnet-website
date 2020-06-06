@@ -3,7 +3,7 @@
 @using Application.Client.Services
 @using Application.Shared.AboutMePage
 
-<section id="testId" class="pt-page pt-page-current pt-page-moveFromRight" data-id="about_me">
+<section id="animatePageRemoval" class="pt-page pt-page-current pt-page-moveFromRight" data-id="about_me">
     <div class="border-block-top-110"></div>
     <div class="section-inner">
         <div class="section-title-block">
@@ -68,7 +68,7 @@
 
     private async Task AnimatePageRemovalAsync()
     {
-        await Js.InvokeVoidAsync("testAnimationFunction", 17);
+        await Js.InvokeVoidAsync("window.animatePageRemoval", 17);
 
         await Task.Delay(300);
     }
