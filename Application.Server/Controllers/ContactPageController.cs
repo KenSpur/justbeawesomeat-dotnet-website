@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Application.Server.Options;
 using Application.Shared.ContactPage;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using SendGrid;
 using SendGrid.Helpers.Mail;
 
@@ -11,9 +13,11 @@ namespace Application.Server.Controllers
     [ApiController]
     public class ContactPageController : ControllerBase
     {
-        public ContactPageController()
-        {
+        private readonly SendGridOptions _options;
 
+        public ContactPageController(IOptions<SendGridOptions> options)
+        {
+            _options = options.Value;
         }
 
         [HttpGet("info")]
@@ -47,17 +51,17 @@ namespace Application.Server.Controllers
         [HttpPost("message")]
         public async Task<IActionResult> PostMessage([FromBody] Message message)
         {
-            //var msg =  new SendGridMessage();
+            var msg =  new SendGridMessage();
 
-            //msg.SetFrom(new EmailAddress(message.Email, message.Name));
+            msg.SetFrom(new EmailAddress(message.Email, message.Name));
 
-            //msg.AddTo(new EmailAddress("Spur.ken@gmail.com", "Ken Spur"));
+            msg.AddTo(new EmailAddress("Spur.ken@justbeawesomeat.net", "Ken Spur"));
 
-            //msg.SetSubject($"{message.Name} - Jba@.net");
-            //msg.AddContent(MimeType.Text, message.Text);
+            msg.SetSubject($"{message.Name} - Contact Form");
+            msg.AddContent(MimeType.Text, message.Text);
 
-            //await new SendGridClient("").SendEmailAsync(msg);
-            await Task.Delay(1000);
+            await new SendGridClient(_options.ApiKey).SendEmailAsync(msg);
+
             return Ok();
         }
     }
