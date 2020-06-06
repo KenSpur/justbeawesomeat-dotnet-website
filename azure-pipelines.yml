@@ -4,7 +4,6 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
   
-
 variables:
   buildConfiguration: 'Release'
   dotnetSdkVersion: '3.1.201'
