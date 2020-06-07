@@ -13,10 +13,10 @@ namespace Application.Server.Controllers
         {
             return Ok(new AboutMe
             {
-                Keywords = "Highly driven, Ambitious, Passionate, Self-thought",
+                Keywords = "Highly driven, Ambitious, Passionate, Self-taught",
                 ImageSource = "images/main_photo.png",
                 Title = ".Net Consultant",
-                Description = "I am a highly driven, ambitious and passionate self-thought Full-stack .Net web/cloud Developer, fascinated by how things work and endlessly excited by current and future possibilities",
+                Description = "I am a highly driven, ambitious and passionate self-taught Full-stack .Net web/cloud Developer, fascinated by how things work and endlessly excited by current and future possibilities",
                 FutureAmbitions = "DevOps Engineering, Cloud solution architecture, Data science, Artificial intelligence, Business Engineering.",
                 Info = new Info
                 {
