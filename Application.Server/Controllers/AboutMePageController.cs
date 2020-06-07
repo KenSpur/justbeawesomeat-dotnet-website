@@ -15,7 +15,7 @@ namespace Application.Server.Controllers
             {
                 Keywords = "Highly driven, Ambitious, Passionate, Self-thought",
                 ImageSource = "images/main_photo.png",
-                Title = "Technical Consultant .Net",
+                Title = ".Net Consultant",
                 Description = "I am a highly driven, ambitious and passionate self-thought Full-stack .Net web/cloud Developer, fascinated by how things work and endlessly excited by current and future possibilities",
                 FutureAmbitions = "DevOps Engineering, Cloud solution architecture, Data science, Artificial intelligence, Business Engineering.",
                 Info = new Info
