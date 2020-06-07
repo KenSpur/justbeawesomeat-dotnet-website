@@ -355,7 +355,7 @@ namespace Application.Server.Controllers
                 {
                     "Cloud-native architecture", "Web architecture", "Design patterns", "Enterprise application patterns",
                     "Clean coding principles", "Test driven development", "Domain driven design", "DevOps practices",
-                    "Lean principles", "Container Orchestration", "Agile project management", "Lean principles"
+                    "Lean principles", "Container Orchestration", "Agile project management"
                 }
             });
         }
