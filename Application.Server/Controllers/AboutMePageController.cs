@@ -126,7 +126,7 @@ namespace Application.Server.Controllers
                     {
                         IconClass = "pe-7s-icon pe-7s-next",
                         Title = "Pluralsight courses consumed",
-                        Value = "205"
+                        Value = "206"
                     },
                     new FunFact
                     {
