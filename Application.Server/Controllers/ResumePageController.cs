@@ -279,7 +279,7 @@ namespace Application.Server.Controllers
                             new Skill
                             {
                                 Title = "T-SQL",
-                                Percentage = 85
+                                Percentage = 75
                             },
                             new Skill
                             {
@@ -316,7 +316,7 @@ namespace Application.Server.Controllers
                             new Skill
                             {
                                 Title = "HTML",
-                                Percentage = 80
+                                Percentage = 75
                             },
                             new Skill
                             {
