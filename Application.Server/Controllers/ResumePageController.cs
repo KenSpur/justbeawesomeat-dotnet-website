@@ -52,8 +52,7 @@ namespace Application.Server.Controllers
                         Tags = new List<string>
                         {
                             "HTML", "CSS", "Bootstrap", "JavaScript", "jQuery", "Blazor Wasm",
-                            "C#", ".Net Core", "Git", "Azure DevOps","Azure", "EF Core", "T-SQL",
-                            "Visual Studio 2019"
+                            "C#", ".Net Core", "Git", "Azure DevOps","Azure", "Visual Studio 2019"
                         }
                     },
                     new Experience
