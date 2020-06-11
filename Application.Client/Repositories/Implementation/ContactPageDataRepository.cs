@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Json;
-using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace Application.Client.Repositories.Implementation
@@ -17,11 +16,9 @@ namespace Application.Client.Repositories.Implementation
         }
 
         public async Task<ICollection<Info>> GetInfoAsync()
-            => await JsonSerializer.DeserializeAsync<ICollection<Info>>(
-                await _httpClient.GetStreamAsync("api/contactpage/info"));
+            => await _httpClient.GetFromJsonAsync<ICollection<Info>>("api/contactpage/info");
 
         public async Task AddMessageAsync(Message message)
             => await _httpClient.PostAsJsonAsync("api/contactpage/message", message);
-
     }
 }

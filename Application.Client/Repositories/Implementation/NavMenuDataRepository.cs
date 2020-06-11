@@ -1,6 +1,6 @@
 ﻿using Application.Shared;
 using System.Net.Http;
-using System.Text.Json;
+using System.Net.Http.Json;
 using System.Threading.Tasks;
 
 namespace Application.Client.Repositories.Implementation
@@ -15,7 +15,6 @@ namespace Application.Client.Repositories.Implementation
         }
 
         public async Task<Name> GetNameAsync()
-            => await JsonSerializer.DeserializeAsync<Name>(
-                await _httpClient.GetStreamAsync("api/navmenu/name"));
+            => await _httpClient.GetFromJsonAsync<Name>("api/navmenu/name");
     }
 }

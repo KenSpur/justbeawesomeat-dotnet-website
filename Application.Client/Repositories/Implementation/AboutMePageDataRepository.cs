@@ -1,6 +1,6 @@
 ﻿using Application.Shared.AboutMePage;
 using System.Net.Http;
-using System.Text.Json;
+using System.Net.Http.Json;
 using System.Threading.Tasks;
 
 namespace Application.Client.Repositories.Implementation
@@ -15,7 +15,6 @@ namespace Application.Client.Repositories.Implementation
         }
 
         public async Task<AboutMe> GetAboutMeAsync()
-            => await JsonSerializer.DeserializeAsync<AboutMe>(
-                await _httpClient.GetStreamAsync("api/aboutmepage/aboutme"));
+            => await _httpClient.GetFromJsonAsync<AboutMe>("api/aboutmepage/aboutme");
     }
 }

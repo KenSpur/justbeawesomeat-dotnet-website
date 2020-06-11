@@ -1,6 +1,6 @@
 ﻿using Application.Shared.ResumePage;
 using System.Net.Http;
-using System.Text.Json;
+using System.Net.Http.Json;
 using System.Threading.Tasks;
 
 namespace Application.Client.Repositories.Implementation
@@ -15,7 +15,6 @@ namespace Application.Client.Repositories.Implementation
         }
 
         public async Task<Resume> GetResumeAsync()
-            => await JsonSerializer.DeserializeAsync<Resume>(
-                await _httpClient.GetStreamAsync("api/resumepage/resume"));
+            => await _httpClient.GetFromJsonAsync<Resume>("api/resumepage/resume");
     }
 }

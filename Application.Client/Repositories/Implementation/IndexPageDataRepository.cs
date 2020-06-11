@@ -1,6 +1,6 @@
 ﻿using Application.Shared.IndexPage;
 using System.Net.Http;
-using System.Text.Json;
+using System.Net.Http.Json;
 using System.Threading.Tasks;
 
 namespace Application.Client.Repositories.Implementation
@@ -15,7 +15,6 @@ namespace Application.Client.Repositories.Implementation
         }
 
         public async Task<Title> GetTitleAsync()
-            => await JsonSerializer.DeserializeAsync<Title>(
-                await _httpClient.GetStreamAsync("api/indexpage/title"));
+            => await _httpClient.GetFromJsonAsync<Title>("api/indexpage/title");
     }
 }
