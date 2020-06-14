@@ -25,7 +25,7 @@ namespace Application.Client
             builder.Services.AddTransient(sp => sp.GetRequiredService<IHttpClientFactory>()
                 .CreateClient("Application.Server"));
 
-            builder.Services.AddTransient<INavMenuDataRepository, NavMenuDataRepository>();
+            builder.Services.AddTransient<IMainPageDataRepository, NavMenuDataRepository>();
             builder.Services.AddTransient<IIndexPageDataRepository, IndexPageDataRepository>();
             builder.Services.AddTransient<IAboutMePageDataRepository, AboutMePageDataRepository>();
             builder.Services.AddTransient<IResumePageDataRepository, ResumePageDataRepository>();

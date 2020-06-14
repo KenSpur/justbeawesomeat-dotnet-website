@@ -5,6 +5,6 @@ namespace Application.Client.Repositories
 {
     public interface IAboutMePageDataRepository
     {
-        Task<AboutMe> GetAboutMeAsync();
+        Task<AboutMePageData> GetAboutMePageDataAsync();
     }
 }

@@ -14,7 +14,7 @@ namespace Application.Client.Repositories.Implementation
             _httpClient = httpClient;
         }
 
-        public async Task<Resume> GetResumeAsync()
-            => await _httpClient.GetFromJsonAsync<Resume>("api/resumepage/resume");
+        public async Task<ResumePageData> GetResumePageDataAsync()
+            => await _httpClient.GetFromJsonAsync<ResumePageData>("api/resumepage/resume");
     }
 }

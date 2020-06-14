@@ -9,36 +9,36 @@
         <div class="section-title-block">
             <div class="section-title-wrapper clearfix">
                 <h2 class="section-title">About Me</h2>
-                <h5 class="section-description">@AboutMe.Keywords</h5>
+                <h5 class="section-description">@AboutMePageData.Keywords</h5>
             </div>
         </div>
 
         <div class="row">
             <div class="col-sm-6 col-md-6 col-lg-4 subpage-block">
                 <div class="my-photo-block tilt-effect">
-                    <img src="@AboutMe.ImageSource" alt="me">
+                    <img src="@AboutMePageData.ImageSource" alt="me">
                 </div>
             </div>
 
             <div class="col-sm-6 col-md-6 col-lg-4">
-                <h3>@AboutMe.Title</h3>
-                <p>@AboutMe.Description</p>
+                <h3>@AboutMePageData.Title</h3>
+                <p>@AboutMePageData.Description</p>
                 <p><b>Future ambitions:</b></p>
-                <p><i>@AboutMe.FutureAmbitions</i></p>
+                <p><i>@AboutMePageData.FutureAmbitions</i></p>
             </div>
 
             <div class="col-sm-6 col-md-6 col-lg-4 subpage-block">
 
-                <InfoBlock Info="@AboutMe.Info"/>
+                <InfoBlock Info="@AboutMePageData.Info"/>
 
-                <SocialLinksBlock Links="@AboutMe.SocialLinks"/>
+                <SocialLinksBlock Links="@AboutMePageData.SocialLinks"/>
 
             </div>
         </div>
 
-        <ServicesBlock Services="@AboutMe.Services"/>
-        <TestimonialsBlock Testimonials="@AboutMe.Testimonials"/>
-        <FunFactsBlock FunFacts="@AboutMe.FunFacts"/>
+        <ServicesBlock Services="@AboutMePageData.Services"/>
+        <TestimonialsBlock Testimonials="@AboutMePageData.Testimonials"/>
+        <FunFactsBlock FunFacts="@AboutMePageData.FunFacts"/>
 
     </div>
 </section>
@@ -49,13 +49,13 @@
     [Inject] public IJSRuntime Js { get; set; }
     [Inject] public IAboutMePageDataRepository Repository { get; set; }
 
-    public AboutMe AboutMe { get; set; } = new AboutMe();
+    public AboutMePageData AboutMePageData { get; set; } = new AboutMePageData();
 
     protected override async Task OnInitializedAsync()
     {
         NavigationService.AnimatePageRemovalAsync = AnimatePageRemovalAsync;
 
-        AboutMe = await Repository.GetAboutMeAsync();
+        AboutMePageData = await Repository.GetAboutMePageDataAsync();
 
         StateHasChanged();
     }

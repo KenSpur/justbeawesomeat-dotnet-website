@@ -3,12 +3,12 @@
 @using Application.Client.Services
 @using Application.Shared.IndexPage
 
-<section id="animatePageRemoval" class="pt-page pt-page-1 section-without-bg section-paddings-0 table pt-page-current pt-page-scaleUpDown pt-page-delay300" data-id="home">
+<section id="animatePageRemoval" class="pt-page section-without-bg section-paddings-0 table pt-page-current pt-page-scaleUpDown pt-page-delay300" data-id="home">
     <div class="section-inner">
         <div class="home-page-block">
-            <h2>@Title.FullName</h2>
+            <h2>@IndexPageData.Title.FullName</h2>
             <div class="owl-carousel text-rotation">
-                @foreach (var item in Title.Items)
+                @foreach (var item in IndexPageData.Title.Items)
                 {
                     <div class="item">
                         <p class="home-page-description">@item</p>
@@ -25,13 +25,13 @@
     [Inject] public INavigationService NavigationService { get; set; }
     [Inject] public IIndexPageDataRepository Repository { get; set; }
 
-    public Title Title { get; set; } =  new Title();
+    public IndexPageData IndexPageData { get; set; } =  new IndexPageData();
 
     protected override async Task OnInitializedAsync()
     {
         NavigationService.AnimatePageRemovalAsync = AnimatePageRemovalAsync;
 
-        Title = await Repository.GetTitleAsync();
+        IndexPageData = await Repository.GetIndexPageDataAsync();
 
         StateHasChanged();
     }

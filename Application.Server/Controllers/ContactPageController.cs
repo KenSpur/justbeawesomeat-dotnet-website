@@ -23,27 +23,30 @@ namespace Application.Server.Controllers
         [HttpGet("info")]
         public IActionResult GetInfo()
         {
-            return Ok(new List<Info>
+            return Ok(new ContactPageData
             {
-                new Info
+                Info = new List<Info>
                 {
-                    IconClass = "pe-7s-icon pe-7s-map-marker",
-                    Text = "2018 Antwerp"
-                },
-                new Info
-                {
-                    IconClass = "pe-7s-icon pe-7s-mail",
-                    Text = "Spur.ken@justbeawesomeat.net"
-                },
-                new Info
-                {
-                    IconClass = "pe-7s-icon pe-7s-call",
-                    Text = "+32 491 29 67 63"
-                },
-                new Info
-                {
-                    IconClass = "pe-7s-icon pe-7s-check",
-                    Text = "Freelance Available"
+                    new Info
+                    {
+                        IconClass = "pe-7s-icon pe-7s-map-marker",
+                        Text = "2018 Antwerp"
+                    },
+                    new Info
+                    {
+                        IconClass = "pe-7s-icon pe-7s-mail",
+                        Text = "Spur.ken@justbeawesomeat.net"
+                    },
+                    new Info
+                    {
+                        IconClass = "pe-7s-icon pe-7s-call",
+                        Text = "+32 491 29 67 63"
+                    },
+                    new Info
+                    {
+                        IconClass = "pe-7s-icon pe-7s-check",
+                        Text = "Freelance Available"
+                    }
                 }
             });
         }

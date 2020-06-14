@@ -3,11 +3,11 @@ using System.Text.Json.Serialization;
 
 namespace Application.Shared.AboutMePage
 {
-    public class AboutMe
+    public class AboutMePageData : IPageData
     {
         [JsonPropertyName("keywords")]
         public string Keywords { get; set; }
-        [JsonPropertyName("Image_source")]
+        [JsonPropertyName("image_source")]
         public string ImageSource { get; set; }
         [JsonPropertyName("title")]
         public string Title { get; set; }

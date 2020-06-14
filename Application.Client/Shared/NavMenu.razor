@@ -1,16 +1,15 @@
-﻿@using Application.Client.Repositories
-@using Application.Client.Services
-@using Application.Shared
+﻿@using Application.Client.Services
+@using Application.Shared.MainPage
 
 <!-- Navigation -->
 <!-- Header -->
 <header id="site_header" class="header mobile-menu-hide header-color-dark">
     <div class="my-photo tilt-effect">
-        <img src="images/jba-monkey.jpg" alt="image">
+        <img src="@Details.ImageSource" alt="image">
     </div>
 
     <div class="site-title-block">
-        <h1 class="site-title">@Name.FullName</h1>
+        <h1 class="site-title">@Details.FullName</h1>
     </div>
 
     <div class="site-nav">
@@ -51,7 +50,7 @@
 <!-- Mobile Header -->
 <div class="mobile-header mobile-visible">
     <div class="mobile-logo-container">
-        <div class="mobile-site-title">@Name.FirstName @Name.LastName</div>
+        <div class="mobile-site-title">@Details.FullName</div>
     </div>
 
     <a class="menu-toggle mobile-visible">
@@ -64,14 +63,9 @@
 {
     [Inject] public IJSRuntime Js { get; set; }
     [Inject] public INavigationService NavigationService { get; set; }
-    [Inject] public INavMenuDataRepository NavMenuDataService { get; set; }
 
-    public Name Name { get; set; } = new Name();
-
-    protected override async Task OnInitializedAsync()
-    {
-        Name = await NavMenuDataService.GetNameAsync();
-    }
+    [Parameter] 
+    public NavMenuDetails Details { get; set; } = new NavMenuDetails();
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {

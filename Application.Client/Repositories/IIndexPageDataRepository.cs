@@ -5,6 +5,6 @@ namespace Application.Client.Repositories
 {
     public interface IIndexPageDataRepository
     {
-        Task<Title> GetTitleAsync();
+        Task<IndexPageData> GetIndexPageDataAsync();
     }
 }

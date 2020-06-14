@@ -10,11 +10,14 @@ namespace Application.Server.Controllers
         [HttpGet("title")]
         public IActionResult GetTitle()
         {
-            return Ok(new Title
+            return Ok(new IndexPageData
             {
-                FirstName = "Ken",
-                LastName = "Spur",
-                Items = new[] { ".Net Consultant", "Full stack Web Developer", "Full stack Cloud Developer", "DevOps Engineer" }
+                Title = new Title
+                {
+                    FirstName = "Ken",
+                    LastName = "Spur",
+                    Items = new[] { ".Net Consultant", "Full stack Web Developer", "Full stack Cloud Developer", "DevOps Engineer" }
+                }
             });
         }
     }

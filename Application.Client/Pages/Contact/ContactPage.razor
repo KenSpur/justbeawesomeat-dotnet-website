@@ -21,7 +21,7 @@
                 </div>
                 <p>Send me a message</p>
 
-                <InfoBlocks Info="Info" />
+                <InfoBlocks Info="ContactPageData.Info" />
             </div>
 
             <div class="col-sm-6 col-md-6 subpage-block">
@@ -38,13 +38,13 @@
     [Inject] public INavigationService NavigationService { get; set; }
     [Inject] public IContactPageDataRepository Repository { get; set; }
 
-    public ICollection<Info> Info { get; set; } = new List<Info>();
+    public ContactPageData ContactPageData { get; set; } = new ContactPageData();
 
     protected override async Task OnInitializedAsync()
     {
         NavigationService.AnimatePageRemovalAsync = AnimatePageRemovalAsync;
 
-        Info = await Repository.GetInfoAsync();
+        ContactPageData = await Repository.GetContactPageDataAsync();
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)

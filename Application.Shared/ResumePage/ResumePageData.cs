@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace Application.Shared.ResumePage
 {
-    public class Resume
+    public class ResumePageData : IPageData
     {
         [JsonPropertyName("years_of_experience")]
         public int YearsOfExperience { get; set; }

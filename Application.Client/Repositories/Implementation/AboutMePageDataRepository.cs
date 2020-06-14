@@ -14,7 +14,7 @@ namespace Application.Client.Repositories.Implementation
             _httpClient = httpClient;
         }
 
-        public async Task<AboutMe> GetAboutMeAsync()
-            => await _httpClient.GetFromJsonAsync<AboutMe>("api/aboutmepage/aboutme");
+        public async Task<AboutMePageData> GetAboutMePageDataAsync()
+            => await _httpClient.GetFromJsonAsync<AboutMePageData>("api/aboutmepage/aboutme");
     }
 }

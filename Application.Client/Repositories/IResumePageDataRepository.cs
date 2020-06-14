@@ -5,6 +5,6 @@ namespace Application.Client.Repositories
 {
     public interface IResumePageDataRepository
     {
-        Task<Resume> GetResumeAsync();
+        Task<ResumePageData> GetResumePageDataAsync();
     }
 }

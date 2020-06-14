@@ -1,9 +1,11 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace Application.Shared
+namespace Application.Shared.MainPage
 {
-    public class Name
+    public class NavMenuDetails
     {
+        [JsonPropertyName("image_source")]
+        public string ImageSource { get; set; }
         [JsonPropertyName("first_name")]
         public string FirstName { get; set; }
         [JsonPropertyName("last_name")]

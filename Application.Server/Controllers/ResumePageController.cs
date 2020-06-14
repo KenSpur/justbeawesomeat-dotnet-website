@@ -11,7 +11,7 @@ namespace Application.Server.Controllers
         [HttpGet("resume")]
         public IActionResult GetResume()
         {
-            return Ok(new Resume
+            return Ok(new ResumePageData
             {
                 YearsOfExperience = 3,
                 Certifications = new List<Certification>

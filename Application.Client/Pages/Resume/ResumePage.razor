@@ -9,20 +9,20 @@
         <div class="section-title-block">
             <div class="section-title-wrapper">
                 <h2 class="section-title">Resume</h2>
-                <h5 class="section-description">@Resume.YearsOfExperience Years of Experience</h5>
+                <h5 class="section-description">@ResumePageData.YearsOfExperience Years of Experience</h5>
             </div>
         </div>
         <div class="row">
             <div class="col-sm-12 col-md-8 subpage-block">
-                <ExperiencesBlock Experiences="@Resume.Experiences" />
+                <ExperiencesBlock Experiences="@ResumePageData.Experiences" />
             </div>
             <div class="col-sm-6 col-md-4 subpage-block">
-                @foreach (var skills in Resume.SkillsCollection)
+                @foreach (var skills in ResumePageData.SkillsCollection)
                 {
                     <SkillsBlock Title="@skills.Title" Skills="@skills.Collection" />
                 }
-                <IndustryKnowledgeBlock IndustryKnowledge="@Resume.IndustryKnowledge" />
-                <CertificationsBlock Certifications="@Resume.Certifications" />
+                <IndustryKnowledgeBlock IndustryKnowledge="@ResumePageData.IndustryKnowledge" />
+                <CertificationsBlock Certifications="@ResumePageData.Certifications" />
             </div>
         </div>
         <div class="row">
@@ -41,13 +41,13 @@
     [Inject] public INavigationService NavigationService { get; set; }
     [Inject] public IResumePageDataRepository Repository { get; set; }
 
-    public Resume Resume { get; set; } = new Resume();
+    public ResumePageData ResumePageData { get; set; } = new ResumePageData();
 
     protected override async Task OnInitializedAsync()
     {
         NavigationService.AnimatePageRemovalAsync = AnimatePageRemovalAsync;
 
-        Resume = await Repository.GetResumeAsync();
+        ResumePageData = await Repository.GetResumePageDataAsync();
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)

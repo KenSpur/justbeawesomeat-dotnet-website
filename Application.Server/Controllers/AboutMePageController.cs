@@ -1,6 +1,8 @@
 ﻿using Application.Shared.AboutMePage;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using Application.Server.Services;
 
 namespace Application.Server.Controllers
 {
@@ -8,10 +10,19 @@ namespace Application.Server.Controllers
     [ApiController]
     public class AboutMePageController : ControllerBase
     {
-        [HttpGet("aboutme")]
-        public IActionResult GetAboutMe()
+        private readonly IStorageService _storageService;
+
+        public AboutMePageController(IStorageService storageService)
         {
-            return Ok(new AboutMe
+            _storageService = storageService;
+        }
+
+        [HttpGet("aboutme")]
+        public async Task<IActionResult> GetAboutMe()
+        {
+            //return Ok(await _storageService.GetDataAsync<AboutMePageData>());
+
+            return Ok(new AboutMePageData
             {
                 Keywords = "Highly driven, Ambitious, Passionate, Self-taught",
                 ImageSource = "images/main_photo.png",
