@@ -1,4 +1,6 @@
 using Application.Server.Options;
+using Application.Server.Services;
+using Application.Server.Services.Implementations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -20,6 +22,8 @@ namespace Application.Server
         {
             services.AddControllers();
             services.Configure<SendGridOptions>(options => Configuration.GetSection("SendGrid").Bind(options));
+            services.Configure<AzureStorageOptions>(options => Configuration.GetSection("AzureStorage").Bind(options));
+            services.AddTransient<IStorageService, StorageService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
