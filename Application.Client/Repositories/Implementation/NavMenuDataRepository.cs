@@ -15,6 +15,6 @@ namespace Application.Client.Repositories.Implementation
         }
 
         public async Task<MainPageData> GetMainPageDataAsync()
-            => await _httpClient.GetFromJsonAsync<MainPageData>("api/navmenu/name");
+            => await _httpClient.GetFromJsonAsync<MainPageData>("api/mainpage/data");
     }
 }

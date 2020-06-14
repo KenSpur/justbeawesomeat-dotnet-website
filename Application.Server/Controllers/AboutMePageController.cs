@@ -17,8 +17,8 @@ namespace Application.Server.Controllers
             _storageService = storageService;
         }
 
-        [HttpGet("aboutme")]
-        public async Task<IActionResult> GetAboutMe()
+        [HttpGet("data")]
+        public async Task<IActionResult> GetDataAsync()
         {
             //return Ok(await _storageService.GetDataAsync<AboutMePageData>());
 

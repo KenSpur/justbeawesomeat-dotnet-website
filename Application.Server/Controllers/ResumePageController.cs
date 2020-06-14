@@ -8,8 +8,8 @@ namespace Application.Server.Controllers
     [ApiController]
     public class ResumePageController : ControllerBase
     {
-        [HttpGet("resume")]
-        public IActionResult GetResume()
+        [HttpGet("data")]
+        public IActionResult GetData()
         {
             return Ok(new ResumePageData
             {

@@ -7,8 +7,8 @@ namespace Application.Server.Controllers
     [ApiController]
     public class IndexPageController : ControllerBase
     {
-        [HttpGet("title")]
-        public IActionResult GetTitle()
+        [HttpGet("data")]
+        public IActionResult GetData()
         {
             return Ok(new IndexPageData
             {

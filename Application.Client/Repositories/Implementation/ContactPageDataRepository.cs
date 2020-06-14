@@ -15,7 +15,7 @@ namespace Application.Client.Repositories.Implementation
         }
 
         public async Task<ContactPageData> GetContactPageDataAsync()
-            => await _httpClient.GetFromJsonAsync<ContactPageData>("api/contactpage/info");
+            => await _httpClient.GetFromJsonAsync<ContactPageData>("api/contactpage/data");
 
         public async Task AddMessageAsync(Message message)
             => await _httpClient.PostAsJsonAsync("api/contactpage/message", message);

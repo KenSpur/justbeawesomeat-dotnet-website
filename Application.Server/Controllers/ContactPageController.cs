@@ -20,8 +20,8 @@ namespace Application.Server.Controllers
             _options = options.Value;
         }
 
-        [HttpGet("info")]
-        public IActionResult GetInfo()
+        [HttpGet("data")]
+        public IActionResult GetData()
         {
             return Ok(new ContactPageData
             {

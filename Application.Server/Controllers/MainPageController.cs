@@ -5,10 +5,10 @@ namespace Application.Server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class NavMenuController : ControllerBase
+    public class MainPageController : ControllerBase
     {
-        [HttpGet("name")]
-        public IActionResult GetName()
+        [HttpGet("data")]
+        public IActionResult GetData()
         {
             return Ok(new MainPageData
             {

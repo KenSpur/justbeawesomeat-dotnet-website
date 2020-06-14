@@ -15,6 +15,6 @@ namespace Application.Client.Repositories.Implementation
         }
 
         public async Task<IndexPageData> GetIndexPageDataAsync()
-            => await _httpClient.GetFromJsonAsync<IndexPageData>("api/indexpage/title");
+            => await _httpClient.GetFromJsonAsync<IndexPageData>("api/indexpage/data");
     }
 }
