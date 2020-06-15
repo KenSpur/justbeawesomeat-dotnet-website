@@ -151,7 +151,7 @@ namespace Application.Server.Controllers
                         Tags = new List<string>
                         {
                             "C#", ".Net Core 1.x-Preview", ".Net Framework 4.5.2", "EF", "NHibernate",
-                            "NuGet", "Hyper-V", "Topshelf", "RabbitMQ", "MS Test", "Azure DevOps", "TFS",
+                            "NuGet", "Hyper-V", "Topshelf", "WCF", "RabbitMQ", "MS Test", "Azure DevOps", "TFS",
                             "Google APIs", "Visual Studio 2015", "Micro service Architecture", "DDD", "CQRS",
                             "Agile", "Scrum"
                         }
