@@ -1,7 +1,7 @@
-﻿using System.Threading.Tasks;
-using Application.Server.Services;
+﻿using Application.Server.Services;
 using Application.Shared.MainPage;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace Application.Server.Controllers
 {

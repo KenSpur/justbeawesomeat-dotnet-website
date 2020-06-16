@@ -1,7 +1,4 @@
-﻿using System;
-using System.Text.Json;
-using System.Threading.Tasks;
-using Application.Server.Options;
+﻿using Application.Server.Options;
 using Application.Shared;
 using Application.Shared.AboutMePage;
 using Application.Shared.ContactPage;
@@ -10,6 +7,9 @@ using Application.Shared.MainPage;
 using Application.Shared.ResumePage;
 using Azure.Storage.Blobs;
 using Microsoft.Extensions.Options;
+using System;
+using System.Text.Json;
+using System.Threading.Tasks;
 
 namespace Application.Server.Services.Implementations
 {
@@ -39,7 +39,7 @@ namespace Application.Server.Services.Implementations
             if (typeof(T) == typeof(AboutMePageData)) return _options.AboutMePageDataBlob;
             if (typeof(T) == typeof(ResumePageData)) return _options.ResumePageDataBlob;
             if (typeof(T) == typeof(ContactPageData)) return _options.ContactPageDataBlob;
-            
+
             throw new ArgumentOutOfRangeException();
         }
     }

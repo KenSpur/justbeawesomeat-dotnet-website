@@ -1,8 +1,7 @@
-﻿using Application.Shared.AboutMePage;
+﻿using Application.Server.Services;
+using Application.Shared.AboutMePage;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
 using System.Threading.Tasks;
-using Application.Server.Services;
 
 namespace Application.Server.Controllers
 {

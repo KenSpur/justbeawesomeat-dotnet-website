@@ -1,7 +1,7 @@
-﻿using System.Net.Http;
+﻿using Application.Shared.MainPage;
+using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
-using Application.Shared.MainPage;
 
 namespace Application.Client.Repositories.Implementation
 {

@@ -1,7 +1,7 @@
-﻿using Application.Shared.ResumePage;
+﻿using Application.Server.Services;
+using Application.Shared.ResumePage;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
-using Application.Server.Services;
 
 namespace Application.Server.Controllers
 {

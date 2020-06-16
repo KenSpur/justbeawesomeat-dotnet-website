@@ -1,5 +1,5 @@
-﻿using System.Threading.Tasks;
-using Application.Shared;
+﻿using Application.Shared;
+using System.Threading.Tasks;
 
 namespace Application.Server.Services
 {
