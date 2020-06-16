@@ -24,7 +24,7 @@ namespace Application.Server.Services.Implementations
 
         public async Task<T> GetDataAsync<T>() where T : IPageData
         {
-            var container = new BlobContainerClient(_options.ConnectionString, _options.WebsiteDataContainer);
+            var container = new BlobContainerClient(_options.ConnectionString, _options.WebsitePageDataContainer);
             var blob = container.GetBlobClient(GetBlobName<T>());
 
             var download = await blob.DownloadAsync();
@@ -34,11 +34,11 @@ namespace Application.Server.Services.Implementations
 
         private string GetBlobName<T>() where T : IPageData
         {
-            if (typeof(T) == typeof(MainPageData)) return _options.MainBlob;
-            if (typeof(T) == typeof(IndexPageData)) return _options.IndexBlob;
-            if (typeof(T) == typeof(AboutMePageData)) return _options.AboutMeBlob;
-            if (typeof(T) == typeof(ResumePageData)) return _options.ResumeBlob;
-            if (typeof(T) == typeof(ContactPageData)) return _options.ContactBlob;
+            if (typeof(T) == typeof(MainPageData)) return _options.MainPageDataBlob;
+            if (typeof(T) == typeof(IndexPageData)) return _options.IndexPageDataBlob;
+            if (typeof(T) == typeof(AboutMePageData)) return _options.AboutMePageDataBlob;
+            if (typeof(T) == typeof(ResumePageData)) return _options.ResumePageDataBlob;
+            if (typeof(T) == typeof(ContactPageData)) return _options.ContactPageDataBlob;
             
             throw new ArgumentOutOfRangeException();
         }
