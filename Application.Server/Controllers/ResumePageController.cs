@@ -1,6 +1,8 @@
 ﻿using Application.Shared.ResumePage;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Net.Mime;
+using Microsoft.AspNetCore.Http;
 
 namespace Application.Server.Controllers
 {
@@ -9,6 +11,8 @@ namespace Application.Server.Controllers
     public class ResumePageController : ControllerBase
     {
         [HttpGet("resume")]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(typeof(Resume), StatusCodes.Status200OK)]
         public IActionResult GetResume()
         {
             return Ok(new Resume

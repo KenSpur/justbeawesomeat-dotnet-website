@@ -1,6 +1,8 @@
 ﻿using Application.Shared.AboutMePage;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Net.Mime;
+using Microsoft.AspNetCore.Http;
 
 namespace Application.Server.Controllers
 {
@@ -9,6 +11,8 @@ namespace Application.Server.Controllers
     public class AboutMePageController : ControllerBase
     {
         [HttpGet("aboutme")]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(typeof(AboutMe), StatusCodes.Status200OK)]
         public IActionResult GetAboutMe()
         {
             return Ok(new AboutMe

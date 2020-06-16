@@ -5,7 +5,9 @@ using Microsoft.Extensions.Options;
 using SendGrid;
 using SendGrid.Helpers.Mail;
 using System.Collections.Generic;
+using System.Net.Mime;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 
 namespace Application.Server.Controllers
 {
@@ -21,6 +23,8 @@ namespace Application.Server.Controllers
         }
 
         [HttpGet("info")]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(typeof(Info[]), StatusCodes.Status200OK)]
         public IActionResult GetInfo()
         {
             return Ok(new List<Info>
@@ -49,6 +53,8 @@ namespace Application.Server.Controllers
         }
 
         [HttpPost("message")]
+        [Consumes(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> PostMessage([FromBody] Message message)
         {
             var msg = new SendGridMessage();
