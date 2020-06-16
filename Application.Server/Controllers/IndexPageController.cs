@@ -1,4 +1,6 @@
-﻿using Application.Shared.IndexPage;
+﻿using System.Threading.Tasks;
+using Application.Server.Services;
+using Application.Shared.IndexPage;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Application.Server.Controllers
@@ -7,18 +9,15 @@ namespace Application.Server.Controllers
     [ApiController]
     public class IndexPageController : ControllerBase
     {
-        [HttpGet("data")]
-        public IActionResult GetData()
+        private readonly IStorageService _storageService;
+
+        public IndexPageController(IStorageService storageService)
         {
-            return Ok(new IndexPageData
-            {
-                Title = new Title
-                {
-                    FirstName = "Ken",
-                    LastName = "Spur",
-                    Items = new[] { ".Net Consultant", "Full stack Web Developer", "Full stack Cloud Developer", "DevOps Engineer" }
-                }
-            });
+            _storageService = storageService;
         }
+
+        [HttpGet("data")]
+        public async Task<IActionResult> GetData()
+            => Ok(await _storageService.GetDataAsync<IndexPageData>());
     }
 }

@@ -3,9 +3,9 @@ using Application.Shared.ContactPage;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using SendGrid;
-using SendGrid.Helpers.Mail;
-using System.Collections.Generic;
 using System.Threading.Tasks;
+using Application.Server.Services;
+using SendGrid.Helpers.Mail;
 
 namespace Application.Server.Controllers
 {
@@ -13,43 +13,18 @@ namespace Application.Server.Controllers
     [ApiController]
     public class ContactPageController : ControllerBase
     {
+        private readonly IStorageService _storageService;
         private readonly SendGridOptions _options;
 
-        public ContactPageController(IOptions<SendGridOptions> options)
+        public ContactPageController(IOptions<SendGridOptions> options, IStorageService storageService)
         {
+            _storageService = storageService;
             _options = options.Value;
         }
 
         [HttpGet("data")]
-        public IActionResult GetData()
-        {
-            return Ok(new ContactPageData
-            {
-                Info = new List<Info>
-                {
-                    new Info
-                    {
-                        IconClass = "pe-7s-icon pe-7s-map-marker",
-                        Text = "2018 Antwerp"
-                    },
-                    new Info
-                    {
-                        IconClass = "pe-7s-icon pe-7s-mail",
-                        Text = "Spur.ken@justbeawesomeat.net"
-                    },
-                    new Info
-                    {
-                        IconClass = "pe-7s-icon pe-7s-call",
-                        Text = "+32 491 29 67 63"
-                    },
-                    new Info
-                    {
-                        IconClass = "pe-7s-icon pe-7s-check",
-                        Text = "Freelance Available"
-                    }
-                }
-            });
-        }
+        public async Task<IActionResult> GetData()
+            => Ok(await _storageService.GetDataAsync<ContactPageData>());
 
         [HttpPost("message")]
         public async Task<IActionResult> PostMessage([FromBody] Message message)

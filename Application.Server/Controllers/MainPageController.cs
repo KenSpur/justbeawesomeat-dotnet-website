@@ -1,4 +1,6 @@
-﻿using Application.Shared.MainPage;
+﻿using System.Threading.Tasks;
+using Application.Server.Services;
+using Application.Shared.MainPage;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Application.Server.Controllers
@@ -7,18 +9,15 @@ namespace Application.Server.Controllers
     [ApiController]
     public class MainPageController : ControllerBase
     {
-        [HttpGet("data")]
-        public IActionResult GetData()
+        private readonly IStorageService _storageService;
+
+        public MainPageController(IStorageService storageService)
         {
-            return Ok(new MainPageData
-            {
-                NavMenuDetails = new NavMenuDetails
-                {
-                    ImageSource = "images/jba-monkey.jpg",
-                    FirstName = "Ken",
-                    LastName = "Spur",
-                }
-            });
+            _storageService = storageService;
         }
+
+        [HttpGet("data")]
+        public async Task<IActionResult> GetData()
+            => Ok(await _storageService.GetDataAsync<MainPageData>());
     }
 }
