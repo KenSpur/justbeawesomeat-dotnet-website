@@ -24,6 +24,7 @@ namespace Application.Server
             services.Configure<SendGridOptions>(options => Configuration.GetSection("SendGrid").Bind(options));
             services.Configure<AzureStorageOptions>(options => Configuration.GetSection("AzureStorage").Bind(options));
             services.AddTransient<IStorageService, StorageService>();
+            services.AddApplicationInsightsTelemetry(options => Configuration.GetSection("AppInsights").Bind(options));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
