@@ -2,4 +2,4 @@
 
 ## Credits
 
-Graphic design starting point template : https://themeforest.net/item/unique-responsive-vcard-cv-resume-portfolio-personal-template/19650357
+Graphic design starting point template : <https://themeforest.net/item/unique-responsive-vcard-cv-resume-portfolio-personal-template/19650357>
