@@ -1,0 +1,81 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "resourceName": {
+            "type": "object"    
+        },
+        "location": {
+            "type": "string",
+            "defaultValue": "[resourceGroup().location]"
+        },
+        "templatesStorage": {
+            "type": "secureObject"
+        },
+        "aspWebsite": {
+            "type": "object"
+        }
+    },
+    "variables": {
+        "appiWebsiteTemplate": "appi-website.json",
+        "aspWebsiteTemplate": "asp-website.json",
+        "appWebsiteTemplate": "app-website.json",
+        "appiWebsiteName": "[concat('appi-', parameters('resourceName').infix, '-', parameters('resourceName').suffix)]",
+        "aspWebsiteName": "[concat('asp-', parameters('resourceName').infix, '-', parameters('resourceName').suffix)]",
+        "appWebsiteName": "[concat('app-', parameters('resourceName').infix, '-', parameters('resourceName').suffix)]"
+    },
+    "resources": [
+        { // appi-website-env-location
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2019-10-01",
+            "name": "[variables('appiWebsiteName')]",
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[concat(parameters('templatesStorage').location, '/', variables('appiWebsiteTemplate'), parameters('templatesStorage').sasToken)]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {    
+                    "resourceName": { "value": "[variables('appiWebsiteName')]" },              
+                    "location": { "value": "[parameters('location')]" }               
+                }
+            }
+        },
+        { // asp-website-env-location
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2019-10-01",
+            "name": "[variables('aspWebsiteName')]",
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[concat(parameters('templatesStorage').location, '/', variables('aspWebsiteTemplate'), parameters('templatesStorage').sasToken)]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {    
+                    "resourceName": { "value": "[variables('aspWebsiteName')]" },              
+                    "location": { "value": "[parameters('location')]" },
+                    "sku": { "value": "[parameters('aspWebsite').sku]" }               
+                }
+            }
+        },
+        { // app-website-env-location
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2019-10-01",
+            "dependsOn": [ "[variables('aspWebsiteName')]" ],
+            "name": "[variables('appWebsiteName')]",
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[concat(parameters('templatesStorage').location, '/', variables('appWebsiteTemplate'), parameters('templatesStorage').sasToken)]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {    
+                    "resourceName": { "value": "[variables('appWebsiteName')]" },              
+                    "location": { "value": "[parameters('location')]" },
+                    "appServicePlanId": { "value": "[reference(variables('aspWebsiteName')).outputs.resource.value.resourceId]" }               
+                }
+            }
+        }
+    ],
+    "outputs": {}
+}
