@@ -1,0 +1,51 @@
+parameters:
+  name: ''
+  displayName: ''
+  environment: ''
+  environmentSuffix: ''
+  azureServiceCollection: ''
+  variables: ''
+
+jobs:
+  - deployment: ${{ parameters.name }}
+    displayName: ${{ parameters.displayName }}
+    variables: 
+    - ${{parameters.variables }}
+    - name: TemplatesStorageLocation
+      value: https://$(TemplateStorageAccountName).blob.core.windows.net/$(TemplateStorageContainerName)/$(Build.DefinitionName)/$(Build.BuildNumber)
+    pool: 
+      vmImage: windows-latest
+    environment: ${{ parameters.environment }}
+    strategy: 
+      runOnce: 
+        deploy:
+          steps:
+          - task: AzurePowerShell@5
+            displayName: Generate Storage Container SasToken
+            inputs:
+              scriptType: inlineScript
+              azureSubscription: ${{ parameters.azureServiceCollection }}
+              azurePowerShellVersion: latestVersion
+              inline: |
+                $StorageContext = New-AzStorageContext -StorageAccountName $Env:TemplateStorageAccountName  -StorageAccountKey $Env:TemplateStorageAccountKey
+                $StartTime = Get-Date
+                $EndTime = $startTime.AddMinutes(5)
+                $StorageContainerSasToken = New-AzStorageContainerSASToken -Name $Env:TemplateStorageContainerName -Permission rl -StartTime $StartTime -ExpiryTime $EndTime -context $StorageContext
+                Write-Host  "##vso[task.setVariable variable=TemplateStorageContainerSasToken;]$StorageContainerSasToken"
+
+          - task: AzureResourceManagerTemplateDeployment@3
+            displayName: Deploy landscape
+            inputs:
+              deploymentScope: 'Resource Group'
+              azureResourceManagerConnection: ${{ parameters.azureServiceCollection }}
+              subscriptionId: $(AzureSubscriptionId)
+              action: 'Create Or Update Resource Group'
+              resourceGroupName: 'rg-$(ResourceNameInfix)-${{ parameters.environmentSuffix }}-$(LocationSuffix)'
+              location: '$(Location)'
+              templateLocation: 'URL of the file'
+              csmFileLink: $(TemplatesStorageLocation)/azuredeploy.json$(TemplateStorageContainerSasToken)
+              csmParametersFileLink: $(TemplatesStorageLocation)/azuredeploy.parameters.${{ parameters.environmentSuffix }}.json$(TemplateStorageContainerSasToken)
+              overrideParameters: >
+                -resourceName { "infix": "$(ResourceNameInfix)", "suffix": "${{ parameters.environmentSuffix }}-$(LocationSuffix)" }
+                -templatesStorage { "location": "$(TemplatesStorageLocation)", "sasToken": "$(TemplateStorageContainerSasToken)" }
+              deploymentMode: 'Incremental'

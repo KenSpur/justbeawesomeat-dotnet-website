@@ -1,0 +1,77 @@
+trigger:
+- master
+- develop
+- feature/*
+
+pool:
+  vmImage: 'windows-latest'
+
+stages:
+  - stage: Build
+    jobs:
+      - job: BuildArtifact
+        displayName: Build Artifact
+        variables: 
+        - group: pipeline
+        steps:
+
+          - task: CopyFiles@2
+            displayName: Copy templates to Artifact directory
+            inputs:
+              Contents: 'landscape/**/*.json'
+              TargetFolder: $(Build.ArtifactStagingDirectory)
+              flattenFolders: true
+
+          - task: AzureFileCopy@3
+            inputs:
+              SourcePath: '$(Build.ArtifactStagingDirectory)'
+              azureSubscription: 'Azure Service Connection'
+              Destination: 'AzureBlob'
+              storage: '$(TemplateStorageAccountName)'
+              ContainerName: '$(TemplateStorageContainerName)'
+              BlobPrefix: '$(Build.DefinitionName)/$(Build.BuildNumber)/'
+
+          - template: build-application.yml
+            parameters:
+              buildConfiguration: 'Release'
+              dotnetSdkVersion: '3.1.201'
+              project: '**/Application.Server.csproj'
+
+          - task: PublishBuildArtifacts@1
+            displayName: Publish Artifacts
+            inputs:
+              PathToPublish: '$(Build.artifactStagingDirectory)'
+              artifactName: 'drop'
+
+  - stage: Dev
+    jobs:
+    - template: deploy.yml
+      parameters:
+        name: Dev
+        displayName: deploy to dev
+        environment: Development
+        environmentSuffix: dev
+        azureServiceCollection: 'Azure Service Connection'
+        variables:
+        - group: pipeline
+
+  - stage: Cleanup
+    condition: always()
+    dependsOn: 
+    - Build
+    - Dev
+    jobs:
+      - job: Cleanup
+        displayName: cleanup
+        variables: 
+        - group: pipeline
+        steps:
+          - task: AzurePowerShell@5
+            displayName: Remove all blobs
+            inputs:
+              scriptType: inlineScript
+              azureSubscription: 'Azure Service Connection'
+              azurePowerShellVersion: latestVersion
+              inline: |
+                $StorageContext = New-AzStorageContext -StorageAccountName $Env:TemplateStorageAccountName  -StorageAccountKey $Env:TemplateStorageAccountKey
+                Get-AzStorageBlob -Container $Env:TemplateStorageContainerName -blob '$Env:Build.DefinitionName/$Env:Build.BuildNumber/*.*' -Context $StorageContext | Remove-AzStorageBlob
