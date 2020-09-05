@@ -12,8 +12,6 @@
             "type": "string"
         }
     },
-    "functions": [],
-    "variables": {},
     "resources": [
       {
             "apiVersion": "2018-11-01",
@@ -24,6 +22,5 @@
                 "serverFarmId": "[parameters('appServicePlanId')]"
             }
         }
-    ],
-    "outputs": {}
+    ]
 }
