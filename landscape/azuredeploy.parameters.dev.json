@@ -24,6 +24,14 @@
                 "sku": "Standard",
                 "enableTemplateDeployment": true
             }
+        },
+        "stWebsite": {
+            "value": {
+                "sku": "Standard_LRS"
+            }
+        },
+        "acmeBot":{
+            "value": {}
         }
     }
 }

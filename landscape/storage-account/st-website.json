@@ -7,28 +7,28 @@
         },
         "location": {
             "type": "string"
+        },
+        "sku": {
+            "type": "string"
         }
     },
     "resources": [
          {
-            "type": "microsoft.insights/components",
-            "apiVersion": "2018-05-01-preview",
+            "type": "Microsoft.Storage/storageAccounts",
             "name": "[parameters('resourceName')]",
+            "apiVersion": "2019-06-01",
             "location": "[parameters('location')]",
-            "kind": "web",
-            "properties": {
-                "Application_Type": "web",
-                "publicNetworkAccessForIngestion": "Enabled",
-                "publicNetworkAccessForQuery": "Enabled"
-            }
+            "kind": "StorageV2",
+            "sku": { "name": "[parameters('sku')]" }
         }
     ],
     "outputs": {
         "resource": {
             "type": "object",
             "value": {
-                "instrumentationKey": "[reference(parameters('resourceName')).InstrumentationKey]",
-                "endpoint": "applicationinsights.azure.com"
+                "name": "[parameters('resourceName')]",
+                "resourceId": "[resourceId('Microsoft.Storage/storageAccounts', parameters('resourceName'))]",
+                "keys": "[listKeys(resourceId('', parameters('resourceName')), '2018-11-01').keys]"
             }
         }
     }

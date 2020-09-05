@@ -34,7 +34,7 @@
       }
     ],
     "outputs": {
-        "keyVault": {
+        "resource": {
             "type": "object",
             "value": {
                 "keyVaultName":  "[parameters('resourceName')]",

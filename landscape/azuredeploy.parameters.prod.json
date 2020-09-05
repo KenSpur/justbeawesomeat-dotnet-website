@@ -24,6 +24,17 @@
                 "sku": "Standard",
                 "enableTemplateDeployment": true
             }
+        },
+        "stWebsite": {
+            "value": {
+                "sku": "Standard_LRS"
+            }
+        },
+        "acmeBot":{
+            "value": {
+                "mailAddress": "contact@website.com",
+                "endpoint": "https://acme-v02.api.letsencrypt.org/"
+            }
         }
     }
 }

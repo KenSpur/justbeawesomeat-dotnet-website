@@ -6,7 +6,7 @@
             "type": "string"
         },
         "resourceName": {
-            "type": "object"    
+            "type": "object"
         },
         "location": {
             "type": "string",
@@ -20,17 +20,27 @@
         },
         "kvWebsite": {
             "type": "object"
+        },
+        "stWebsite": {
+            "type": "object"
+        },
+        "acmeBot": {
+            "type": "object"
         }
     },
     "variables": {
         "appiWebsiteTemplate": "appi-website.json",
         "kvWebsiteTemplate": "kv-website.json",
+        "stWebsiteTemplate": "st-website.json",
         "aspWebsiteTemplate": "asp-website.json",
-        "appWebsiteTemplate": "app-website.json",      
+        "appWebsiteTemplate": "app-website.json",
+        "acmeBotFunctionDeployTemplate": "fn-acme-bot-website-deploy.json",
         "appiWebsiteName": "[concat('appi-', parameters('resourceName').infix, '-', parameters('resourceName').suffix)]",
         "kvWebsiteName": "[concat('kv-', parameters('resourceName').infix, '-', parameters('resourceName').suffix)]",
+        "stWebsiteName": "[concat('st', parameters('resourceName').infix, parameters('resourceName').suffix)]",
         "aspWebsiteName": "[concat('asp-', parameters('resourceName').infix, '-', parameters('resourceName').suffix)]",
-        "appWebsiteName": "[concat('app-', parameters('resourceName').infix, '-', parameters('resourceName').suffix)]"
+        "appWebsiteName": "[concat('app-', parameters('resourceName').infix, '-', parameters('resourceName').suffix)]",
+        "acmeBotFunctionDeployName": "fn-acme-bot-deploy"
     },
     "resources": [
         { // appi-website-env-location
@@ -43,9 +53,9 @@
                     "uri": "[concat(parameters('templatesStorage').location, '/', variables('appiWebsiteTemplate'), parameters('templatesStorage').sasToken)]",
                     "contentVersion": "1.0.0.0"
                 },
-                "parameters": {    
-                    "resourceName": { "value": "[variables('appiWebsiteName')]" },              
-                    "location": { "value": "[parameters('location')]" }               
+                "parameters": {
+                    "resourceName": { "value": "[variables('appiWebsiteName')]" },
+                    "location": { "value": "[parameters('location')]" }
                 }
             }
         },
@@ -59,11 +69,28 @@
                     "uri": "[concat(parameters('templatesStorage').location, '/', variables('kvWebsiteTemplate'), parameters('templatesStorage').sasToken)]",
                     "contentVersion": "1.0.0.0"
                 },
-                "parameters": {    
-                    "resourceName": { "value": "[variables('kvWebsiteName')]" },              
+                "parameters": {
+                    "resourceName": { "value": "[variables('kvWebsiteName')]" },
                     "location": { "value": "[parameters('location')]" },
                     "sku": { "value": "[parameters('kvWebsite').sku]" },
                     "enableTemplateDeployment": { "value": "[parameters('kvWebsite').enableTemplateDeployment]" }
+                }
+            }
+        },
+         { // stwebsiteenvlocation
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2019-10-01",
+            "name": "[variables('stWebsiteName')]",
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[concat(parameters('templatesStorage').location, '/', variables('stWebsiteTemplate'), parameters('templatesStorage').sasToken)]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "resourceName": { "value": "[variables('stWebsiteName')]" },
+                    "location": { "value": "[parameters('location')]" },
+                    "sku": { "value": "[parameters('stWebsite').sku]" }
                 }
             }
         },
@@ -77,10 +104,10 @@
                     "uri": "[concat(parameters('templatesStorage').location, '/', variables('aspWebsiteTemplate'), parameters('templatesStorage').sasToken)]",
                     "contentVersion": "1.0.0.0"
                 },
-                "parameters": {    
-                    "resourceName": { "value": "[variables('aspWebsiteName')]" },              
+                "parameters": {
+                    "resourceName": { "value": "[variables('aspWebsiteName')]" },
                     "location": { "value": "[parameters('location')]" },
-                    "sku": { "value": "[parameters('aspWebsite').sku]" }               
+                    "sku": { "value": "[parameters('aspWebsite').sku]" }
                 }
             }
         },
@@ -95,28 +122,39 @@
                     "uri": "[concat(parameters('templatesStorage').location, '/', variables('appWebsiteTemplate'), parameters('templatesStorage').sasToken)]",
                     "contentVersion": "1.0.0.0"
                 },
-                "parameters": {    
-                    "resourceName": { "value": "[variables('appWebsiteName')]" },              
+                "parameters": {
+                    "resourceName": { "value": "[variables('appWebsiteName')]" },
                     "location": { "value": "[parameters('location')]" },
-                    "appServicePlanId": { "value": "[reference(variables('aspWebsiteName')).outputs.resource.value.resourceId]" }               
+                    "appServicePlanId": { "value": "[reference(variables('aspWebsiteName')).outputs.resource.value.resourceId]" }
                 }
             }
         },
-        { // fn-acmbot-env-location
+        { // fn-acme-bot-deploy
             "type": "Microsoft.Resources/deployments",
             "apiVersion": "2019-10-01",
-            "name": "[variables('kvWebsiteName')]",
+            "condition": "[equals(parameters('environment'), 'prod')]",
+            "dependsOn": [
+                "[variables('aspWebsiteName')]",
+                "[variables('stWebsiteName')]",
+                "[variables('appiWebsiteName')]",
+                "[variables('kvWebsiteName')]"
+            ],
+            "name": "[variables('acmeBotFunctionDeployName')]",
             "properties": {
                 "mode": "Incremental",
                 "templateLink": {
-                    "uri": "[concat(parameters('templatesStorage').location, '/', variables('kvWebsiteTemplate'), parameters('templatesStorage').sasToken)]",
+                    "uri": "[concat(parameters('templatesStorage').location, '/', variables('acmeBotFunctionDeployTemplate'), parameters('templatesStorage').sasToken)]",
                     "contentVersion": "1.0.0.0"
                 },
-                "parameters": {    
-                    "resourceName": { "value": "[variables('kvWebsiteName')]" },              
+                "parameters": {
+                    "resourceName": { "value": "[parameters('resourceName')]" },
                     "location": { "value": "[parameters('location')]" },
-                    "sku": { "value": "[parameters('kvWebsite').sku]" },
-                    "enableTemplateDeployment": { "value": "[parameters('kvWebsite').enableTemplateDeployment]" }
+                    "templatesStorage": { "value": "[parameters('templatesStorage')]" },
+                    "serverFarm": { "value": "[reference(variables('aspWebsiteName')).outputs.resource.value]" },
+                    "storageAccount": { "value": "[reference(variables('stWebsiteName')).outputs.resource.value]" },
+                    "appInsights": { "value": "[reference(variables('appiWebsiteName')).outputs.resource.value]" },
+                    "acmeBot": { "value": "[parameters('acmeBot')]" },
+                    "keyVault": { "value": "[reference(variables('kvWebsiteName')).outputs.resource.value]" }
                 }
             }
         }

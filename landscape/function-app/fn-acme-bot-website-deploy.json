@@ -1,0 +1,57 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {      
+        "resourceName": {
+            "type": "object"    
+        },
+        "location": {
+            "type": "string"
+        },
+        "templatesStorage": {
+            "type": "secureObject"
+        },
+        "serverFarm": {
+            "type": "object"
+        },
+        "storageAccount": {
+            "type": "object"
+        },
+        "appInsights": {
+          "type": "object"  
+        },
+        "acmeBot": {
+            "type": "object"
+        },
+        "keyVault": {
+            "type": "object"
+        }
+    },
+    "variables": {
+        "acmeBotFucntionTemplate": "fn-acme-bot-website",
+        "acmeBotFunctionName": "[concat('fn-acme-bot-', parameters('resourceName').infix, '-', parameters('resourceName').suffix)]"
+    },
+    "resources": [
+        { // fn-acme-bot-website-env-location
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2019-10-01",
+            "name": "[variables('acmeBotFunctionName')]",
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[concat(parameters('templatesStorage').location, '/', variables('acmeBotFucntionTemplate'), parameters('templatesStorage').sasToken)]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {    
+                    "resourceName": { "value": "[variables('acmeBotFunctionName')]" },              
+                    "location": { "value": "[parameters('location')]" },
+                    "serverFarm": { "value": "[parameters('serverFarm')]" },
+                    "storageAccount": { "value": "[parameters('storageAccount')]" },
+                    "appInsights": { "value": "[parameters('appInsights')]" },
+                    "acmeBot": { "value": "[parameters('acmeBot')]" },
+                    "keyVault": { "value": "[parameters('keyVault')]" }
+                }
+            }
+        }
+    ]
+}
