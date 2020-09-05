@@ -18,6 +18,7 @@
             "type": "Microsoft.Web/sites",
             "name": "[parameters('resourceName')]",
             "location": "[parameters('location')]",
+            "kind": "app",
             "properties": {
                 "serverFarmId": "[parameters('appServicePlanId')]"
             }
