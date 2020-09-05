@@ -32,6 +32,7 @@
             "family": "A"
           },
           "tenantId": "[parameters('tenantId')]",
+          "accessPolicies": [],
           "enabledForTemplateDeployment": "[parameters('enableTemplateDeployment')]"
         }
       }
