@@ -31,7 +31,7 @@
         }
     },
     "variables": {
-        "acmeBotFucntionTemplate": "fn-acme-bot-website",
+        "acmeBotFucntionTemplate": "fn-acme-bot-website.json",
         "acmeBotAccessPoliciesTemplate":"acme-bot-access-policies.json",
         "acmeBotFunctionName": "[concat('fn-acme-bot-', parameters('resourceName').infix, '-', parameters('environment'), '-', parameters('resourceName').locationSuffix)]",
         "acmeBotAccessPoliciesName": "acme-bot-access-policies"
