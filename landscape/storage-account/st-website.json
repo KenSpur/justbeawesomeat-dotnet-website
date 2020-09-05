@@ -28,7 +28,7 @@
             "value": {
                 "name": "[parameters('resourceName')]",
                 "resourceId": "[resourceId('Microsoft.Storage/storageAccounts', parameters('resourceName'))]",
-                "keys": "[listKeys(resourceId('', parameters('resourceName')), '2018-11-01').keys]"
+                "keys": "[listKeys(resourceId('Microsoft.Storage/storageAccounts', parameters('resourceName')), '2018-11-01').keys]"
             }
         }
     }
