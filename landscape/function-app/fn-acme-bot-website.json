@@ -109,7 +109,7 @@
         "resource": {
             "type": "object",
             "value": {
-                "objectId": "[reference(parameters('resourceName')).identity.principalId]"
+                "objectId": "[reference(parameters('resourceName'), '2019-03-01', 'Full').identity.principalId]"
             }
         }
     }
