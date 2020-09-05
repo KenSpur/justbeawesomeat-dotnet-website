@@ -69,8 +69,7 @@
                     "uri": "[concat(parameters('templatesStorage').location, '/', variables('acmeBotAccessPoliciesTemplate'), parameters('templatesStorage').sasToken)]",
                     "contentVersion": "1.0.0.0"
                 },
-                "parameters": {    
-                    "resourceName": { "value": "[variables('acmeBotAccessPoliciesName')]" },                                
+                "parameters": {                                 
                     "keyVault": { "value": "[parameters('keyVault')]" },
                     "functionApp": { "value": "[reference(variables('acmeBotFunctionName')).outputs.resource.value]" }
                 }
