@@ -46,6 +46,6 @@ jobs:
               csmFileLink: $(TemplatesStorageLocation)/azuredeploy.json$(TemplateStorageContainerSasToken)
               csmParametersFileLink: $(TemplatesStorageLocation)/azuredeploy.parameters.${{ parameters.environmentSuffix }}.json$(TemplateStorageContainerSasToken)
               overrideParameters: >
-                -resourceName { "infix": "$(ResourceNameInfix)", "suffix": "${{ parameters.environmentSuffix }}-$(LocationSuffix)" }
+                -resourceName { "infix": "$(ResourceNameInfix)", "locationSuffix": "$(LocationSuffix)" }
                 -templatesStorage { "location": "$(TemplatesStorageLocation)", "sasToken": "$(TemplateStorageContainerSasToken)" }
               deploymentMode: 'Incremental'

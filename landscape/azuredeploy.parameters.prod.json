@@ -8,7 +8,7 @@
         "resourceName": {
             "value": {
                 "infix": "[substring(uniqueString(resourceGroup().id),0,6)]",
-                "suffix": "prod-euw"
+                "locationSuffix": "euw"
             }
         },
         "templatesStorage": {
