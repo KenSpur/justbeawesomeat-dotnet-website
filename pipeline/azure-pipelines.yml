@@ -2,6 +2,7 @@ trigger:
 - master
 - develop
 - feature/*
+- hotfix/*
 
 pool:
   vmImage: 'windows-latest'
@@ -55,11 +56,30 @@ stages:
         variables:
         - group: pipeline
 
+  - stage: Prod
+    condition: |
+      and(succeeded(), 
+        or(
+          eq(variables['Build.SourceBranch'], 'refs/heads/master'),
+          eq(variables['Build.SourceBranch'], 'refs/heads/hotfix/*')
+        )
+      )
+    jobs:
+    - template: deploy.yml
+      parameters:
+        name: Prod
+        environmentSuffix: prod
+        displayName: deploy to prod
+        environment: Production
+        variables: 
+        - group: pipeline
+
   - stage: Cleanup
     condition: always()
     dependsOn: 
     - Build
     - Dev
+    - Prod
     jobs:
       - job: Cleanup
         displayName: cleanup
