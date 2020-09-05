@@ -2,6 +2,9 @@
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
+        "environment": {
+            "type": "string"
+        },
         "resourceName": {
             "type": "object"    
         },
@@ -14,13 +17,18 @@
         },
         "aspWebsite": {
             "type": "object"
+        },
+        "kvWebsite": {
+            "type": "object"
         }
     },
     "variables": {
         "appiWebsiteTemplate": "appi-website.json",
+        "kvWebsiteTemplate": "kv-website.json",
         "aspWebsiteTemplate": "asp-website.json",
-        "appWebsiteTemplate": "app-website.json",
+        "appWebsiteTemplate": "app-website.json",      
         "appiWebsiteName": "[concat('appi-', parameters('resourceName').infix, '-', parameters('resourceName').suffix)]",
+        "kvWebsiteName": "[concat('kv-', parameters('resourceName').infix, '-', parameters('resourceName').suffix)]",
         "aspWebsiteName": "[concat('asp-', parameters('resourceName').infix, '-', parameters('resourceName').suffix)]",
         "appWebsiteName": "[concat('app-', parameters('resourceName').infix, '-', parameters('resourceName').suffix)]"
     },
@@ -38,6 +46,24 @@
                 "parameters": {    
                     "resourceName": { "value": "[variables('appiWebsiteName')]" },              
                     "location": { "value": "[parameters('location')]" }               
+                }
+            }
+        },
+        { // kv-website-env-location
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2019-10-01",
+            "name": "[variables('kvWebsiteName')]",
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[concat(parameters('templatesStorage').location, '/', variables('kvWebsiteTemplate'), parameters('templatesStorage').sasToken)]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {    
+                    "resourceName": { "value": "[variables('kvWebsiteName')]" },              
+                    "location": { "value": "[parameters('location')]" },
+                    "sku": { "value": "[parameters('kvWebsite').sku]" },
+                    "enableTemplateDeployment": { "value": "[parameters('kvWebsite').enableTemplateDeployment]" }
                 }
             }
         },
@@ -75,7 +101,24 @@
                     "appServicePlanId": { "value": "[reference(variables('aspWebsiteName')).outputs.resource.value.resourceId]" }               
                 }
             }
+        },
+        { // fn-acmbot-env-location
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2019-10-01",
+            "name": "[variables('kvWebsiteName')]",
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[concat(parameters('templatesStorage').location, '/', variables('kvWebsiteTemplate'), parameters('templatesStorage').sasToken)]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {    
+                    "resourceName": { "value": "[variables('kvWebsiteName')]" },              
+                    "location": { "value": "[parameters('location')]" },
+                    "sku": { "value": "[parameters('kvWebsite').sku]" },
+                    "enableTemplateDeployment": { "value": "[parameters('kvWebsite').enableTemplateDeployment]" }
+                }
+            }
         }
-    ],
-    "outputs": {}
+    ]
 }

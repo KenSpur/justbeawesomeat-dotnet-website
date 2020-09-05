@@ -3,12 +3,12 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "environment": {
-            "value": "dev"
+            "value": "prod"
         },
         "resourceName": {
             "value": {
                 "infix": "[substring(uniqueString(resourceGroup().id),0,6)]",
-                "suffix": "dev-euw"
+                "suffix": "prod-euw"
             }
         },
         "templatesStorage": {
@@ -16,7 +16,7 @@
         },
         "aspWebsite": {
             "value": {
-                "sku": "F1"
+                "sku": "S1"
             }
         },
         "kvWebsite": {

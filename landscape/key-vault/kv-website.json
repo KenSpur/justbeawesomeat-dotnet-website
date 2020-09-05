@@ -1,0 +1,46 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+      "resourceName": {
+        "type": "string"
+      },
+      "location": {
+        "type": "string"
+      },
+      "tenantId": {
+        "type": "string",
+        "defaultValue": "[subscription().tenantId]"     
+      },
+      "sku": {
+        "type": "string"
+      },
+      "enableTemplateDeployment": {
+        "type": "bool",
+        "defaultValue": false
+      }
+    },
+    "resources": [
+      {
+        "type": "Microsoft.KeyVault/vaults",
+        "name": "[parameters('resourceName')]",
+        "apiVersion": "2019-09-01",
+        "location": "[parameters('location')]",
+        "properties": {
+          "sku": { "name": "[parameters('sku')]" },
+          "tenantId": "[parameters('tenantId')]",
+          "enabledForTemplateDeployment": "[parameters('enableTemplateDeployment')]"
+        }
+      }
+    ],
+    "outputs": {
+        "keyVault": {
+            "type": "object",
+            "value": {
+                "keyVaultName":  "[parameters('resourceName')]",
+                "resourceId": "[resourceId('Microsoft.KeyVault/vaults', parameters('resourceName'))]",
+                "vaultUri": "[reference(resourceId('Microsoft.KeyVault/vaults', parameters('resourceName'))).vaultUri]"
+            }
+        }
+    }
+}
