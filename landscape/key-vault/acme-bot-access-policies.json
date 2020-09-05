@@ -8,7 +8,7 @@
         "keyVault": {
             "type": "object"
         },
-        "fuctionApp": {
+        "functionApp": {
             "type": "object"
         }
     },
@@ -23,7 +23,7 @@
             "properties": {
                 "accessPolicies": [
                     {
-                        "objectId": "[parameters('fuctionApp').objectId]",
+                        "objectId": "[parameters('functionApp').objectId]",
                         "tenantId": "[subscription().tenantId]",
                         "permissions": {
                             "certificates": [ "get", "list", "create", "update" ]
