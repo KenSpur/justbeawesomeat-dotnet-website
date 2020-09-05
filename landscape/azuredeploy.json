@@ -38,8 +38,8 @@
         "appiWebsiteName": "[concat('appi-', parameters('resourceName').infix, '-', parameters('environment'), '-', parameters('resourceName').locationSuffix)]",
         "kvWebsiteName": "[concat('kv-', parameters('resourceName').infix, '-', parameters('environment'), '-', parameters('resourceName').locationSuffix)]",
         "stWebsiteName": "[concat('st', parameters('resourceName').infix, parameters('environment'), parameters('resourceName').locationSuffix)]",
-        "aspWebsiteName": "[concat('asp-', parameters('resourceName').infix, parameters('environment'), '-', parameters('resourceName').locationSuffix)]",
-        "appWebsiteName": "[concat('app-', parameters('resourceName').infix, parameters('environment'), '-', parameters('resourceName').locationSuffix)]",
+        "aspWebsiteName": "[concat('asp-', parameters('resourceName').infix, '-', parameters('environment'), '-', parameters('resourceName').locationSuffix)]",
+        "appWebsiteName": "[concat('app-', parameters('resourceName').infix, '-', parameters('environment'), '-', parameters('resourceName').locationSuffix)]",
         "acmeBotFunctionDeployName": "fn-acme-bot-deploy"
     },
     "resources": [

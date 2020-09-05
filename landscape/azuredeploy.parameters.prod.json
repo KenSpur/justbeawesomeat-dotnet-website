@@ -21,7 +21,7 @@
         },
         "kvWebsite": {
             "value": {
-                "sku": "Standard",
+                "sku": "standard",
                 "enableTemplateDeployment": true
             }
         },

@@ -27,7 +27,10 @@
         "apiVersion": "2019-09-01",
         "location": "[parameters('location')]",
         "properties": {
-          "sku": { "name": "[parameters('sku')]" },
+          "sku": { 
+            "name": "[parameters('sku')]",
+            "family": "A"
+          },
           "tenantId": "[parameters('tenantId')]",
           "enabledForTemplateDeployment": "[parameters('enableTemplateDeployment')]"
         }
