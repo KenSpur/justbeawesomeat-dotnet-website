@@ -41,7 +41,7 @@
         "resource": {
             "type": "object",
             "value": {
-                "keyVaultName":  "[parameters('resourceName')]",
+                "name":  "[parameters('resourceName')]",
                 "resourceId": "[resourceId('Microsoft.KeyVault/vaults', parameters('resourceName'))]",
                 "vaultUri": "[reference(resourceId('Microsoft.KeyVault/vaults', parameters('resourceName'))).vaultUri]"
             }
