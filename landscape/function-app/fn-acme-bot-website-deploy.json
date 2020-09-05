@@ -29,7 +29,9 @@
     },
     "variables": {
         "acmeBotFucntionTemplate": "fn-acme-bot-website",
-        "acmeBotFunctionName": "[concat('fn-acme-bot-', parameters('resourceName').infix, '-', parameters('resourceName').suffix)]"
+        "acmeBotAccessPoliciesTemplate":"acme-bot-access-policies.json",
+        "acmeBotFunctionName": "[concat('fn-acme-bot-', parameters('resourceName').infix, '-', parameters('resourceName').suffix)]",
+        "acmeBotAccessPoliciesName": "acme-bot-access-policies"
     },
     "resources": [
         { // fn-acme-bot-website-env-location
@@ -50,6 +52,24 @@
                     "appInsights": { "value": "[parameters('appInsights')]" },
                     "acmeBot": { "value": "[parameters('acmeBot')]" },
                     "keyVault": { "value": "[parameters('keyVault')]" }
+                }
+            }
+        },
+        { // fn-acme-bot-website-env-location
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2019-10-01",
+            "dependsOn": [ "[variables('acmeBotFunctionName')]" ],
+            "name": "[variables('acmeBotAccessPoliciesName')]",
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[concat(parameters('templatesStorage').location, '/', variables('acmeBotAccessPoliciesTemplate'), parameters('templatesStorage').sasToken)]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {    
+                    "resourceName": { "value": "[variables('acmeBotAccessPoliciesName')]" },                                
+                    "keyVault": { "value": "[parameters('keyVault')]" },
+                    "functionApp": { "value": "[reference(variables('acmeBotFunctionName')).outputs.resource.value]" }
                 }
             }
         }

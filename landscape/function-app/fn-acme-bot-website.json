@@ -104,5 +104,13 @@
                 }
             ]
         }
-    ]
+    ],
+    "outputs": {
+        "resource": {
+            "type": "object",
+            "value": {
+                "objectId": "[reference(parameters('resourceName')).identity.principalId]"
+            }
+        }
+    }
 }
