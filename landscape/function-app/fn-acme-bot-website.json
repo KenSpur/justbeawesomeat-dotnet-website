@@ -99,7 +99,7 @@
                         "[parameters('resourceName')]"
                     ],
                     "properties": {
-                        "synctriggersstatus": "[listsyncfunctiontriggerstatus(resourceId('Microsoft.Web/sites', parameters('resourceName')), '2019-08-01').status]"
+                        "synctriggersstatus": "[listsyncfunctiontriggerstatus(resourceId('Microsoft.Web/sites', parameters('resourceName')), '2020-06-01').status]"
                     }
                 }
             ]
@@ -109,7 +109,7 @@
         "resource": {
             "type": "object",
             "value": {
-                "objectId": "[reference(parameters('resourceName'), '2019-03-01', 'Full').identity.principalId]"
+                "objectId": "[reference(resourceId('Microsoft.Web/sites', parameters('resourceName')), '2020-06-01', 'Full').identity.principalId]"
             }
         }
     }
