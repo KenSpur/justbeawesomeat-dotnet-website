@@ -96,7 +96,7 @@
                     "name": "metadata",
                     "type": "config",
                     "dependsOn": [
-                        "[reference(parameters('resourceName'))]"
+                        "[parameters('resourceName')]"
                     ],
                     "properties": {
                         "synctriggersstatus": "[listsyncfunctiontriggerstatus(resourceId('Microsoft.Web/sites', parameters('resourceName')), '2019-08-01').status]"
