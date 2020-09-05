@@ -5,6 +5,9 @@
         "resourceName": {
             "type": "object"    
         },
+        "environment": {
+            "type": "string"
+        },
         "location": {
             "type": "string"
         },
@@ -30,7 +33,7 @@
     "variables": {
         "acmeBotFucntionTemplate": "fn-acme-bot-website",
         "acmeBotAccessPoliciesTemplate":"acme-bot-access-policies.json",
-        "acmeBotFunctionName": "[concat('fn-acme-bot-', parameters('resourceName').infix, '-', parameters('resourceName').suffix)]",
+        "acmeBotFunctionName": "[concat('fn-acme-bot-', parameters('resourceName').infix, '-', parameters('environment'), '-', parameters('resourceName').locationSuffix)]",
         "acmeBotAccessPoliciesName": "acme-bot-access-policies"
     },
     "resources": [

@@ -35,11 +35,11 @@
         "aspWebsiteTemplate": "asp-website.json",
         "appWebsiteTemplate": "app-website.json",
         "acmeBotFunctionDeployTemplate": "fn-acme-bot-website-deploy.json",
-        "appiWebsiteName": "[concat('appi-', parameters('resourceName').infix, '-', parameters('resourceName').suffix)]",
-        "kvWebsiteName": "[concat('kv-', parameters('resourceName').infix, '-', parameters('resourceName').suffix)]",
-        "stWebsiteName": "[concat('st', parameters('resourceName').infix, parameters('resourceName').suffix)]",
-        "aspWebsiteName": "[concat('asp-', parameters('resourceName').infix, '-', parameters('resourceName').suffix)]",
-        "appWebsiteName": "[concat('app-', parameters('resourceName').infix, '-', parameters('resourceName').suffix)]",
+        "appiWebsiteName": "[concat('appi-', parameters('resourceName').infix, '-', parameters('environment'), '-', parameters('resourceName').locationSuffix)]",
+        "kvWebsiteName": "[concat('kv-', parameters('resourceName').infix, '-', parameters('environment'), '-', parameters('resourceName').locationSuffix)]",
+        "stWebsiteName": "[concat('st', parameters('resourceName').infix, parameters('environment'), parameters('resourceName').locationSuffix)]",
+        "aspWebsiteName": "[concat('asp-', parameters('resourceName').infix, parameters('environment'), '-', parameters('resourceName').locationSuffix)]",
+        "appWebsiteName": "[concat('app-', parameters('resourceName').infix, parameters('environment'), '-', parameters('resourceName').locationSuffix)]",
         "acmeBotFunctionDeployName": "fn-acme-bot-deploy"
     },
     "resources": [
@@ -148,6 +148,7 @@
                 },
                 "parameters": {
                     "resourceName": { "value": "[parameters('resourceName')]" },
+                    "environment": { "value": "[parameters('environment')]" },
                     "location": { "value": "[parameters('location')]" },
                     "templatesStorage": { "value": "[parameters('templatesStorage')]" },
                     "serverFarm": { "value": "[reference(variables('aspWebsiteName')).outputs.resource.value]" },
