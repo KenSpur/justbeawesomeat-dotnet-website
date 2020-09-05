@@ -68,9 +68,10 @@ stages:
     - template: deploy.yml
       parameters:
         name: Prod
-        environmentSuffix: prod
         displayName: deploy to prod
         environment: Production
+        environmentSuffix: prod
+        azureServiceCollection: 'Azure Service Connection'     
         variables: 
         - group: pipeline
 
