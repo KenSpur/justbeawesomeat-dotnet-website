@@ -20,7 +20,8 @@
             "location": "[parameters('location')]",
             "kind": "app",
             "properties": {
-                "serverFarmId": "[parameters('appServicePlanId')]"
+                "serverFarmId": "[parameters('appServicePlanId')]",
+                "httpsOnly": true
             }
         }
     ],
