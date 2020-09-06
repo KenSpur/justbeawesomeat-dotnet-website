@@ -33,8 +33,8 @@
           },
           "tenantId": "[parameters('tenantId')]",
           "accessPolicies": [
-            {
-              "tenantId": "ca672af8-4a00-491a-9fcd-fba58effc88f",
+            { // Microsoft Azure App Service
+              "tenantId": "[subscription().subscriptionId]",
               "objectId": "763658de-692f-4fef-8da0-0e846d77c926",
               "permissions": {
                   "keys": [],
