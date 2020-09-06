@@ -83,7 +83,7 @@
                 },
                 "parameters": {                    
                     "location": { "value": "[parameters('location')]" },
-                    "webApp": { "value": "[parameters('keyVault')]" },
+                    "webApp": { "value": "[parameters('webApp')]" },
                     "hostNameBinding": { "value": "[reference(variables('hostNameBindingName')).outputs.resource.value]" },
                     "certificate": { "value": "[reference(variables('certificateName')).outputs.resource.value]" }                  
                 }
