@@ -188,5 +188,11 @@
                 }
             }
         }
-    ]
+    ],
+    "outputs": {
+        "webApp": {
+            "type": "object",
+            "value": "[reference(variables('appWebsiteName')).outputs.resource.value]"
+        }
+    }
 }
