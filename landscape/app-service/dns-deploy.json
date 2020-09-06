@@ -1,0 +1,93 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "resourceName": {
+            "type": "object"
+        },
+        "templatesStorage": {
+            "type": "object"
+        },
+        "location": {
+            "type": "string"
+        },
+        "webApp": {
+            "type": "object"
+        },
+        "keyVault": {
+            "type": "object"
+        },
+        "serverFarm": {
+            "type": "object"
+        }
+    },
+    "variables": {
+        "certificatTemplate": "certificate.json",
+        "hostNameBindingTemplate": "host-name-binding.json",
+        "hostNameSslStateTemplate": "host-name-ssl-state.json",
+        "certificateName": "justbeawesomeat-net",      
+        "hostNameBindingName": "[concat('host-name-binding-', parameters('resourceName').infix)]",
+        "hostNameSslStateName": "[concat('host-name-ssl-state-', parameters('resourceName').infix)]",
+        "hostName": "justbeawesomeat.net",
+        "kvSecretName": "justbeawesomeat-net"
+    },
+    "resources": [
+        { // justbeawesomeat.net
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2019-10-01",
+            "name": "[variables('hostNameBindingName')]",
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[concat(parameters('templatesStorage').location, '/', variables('hostNameBindingTemplate'), parameters('templatesStorage').sasToken)]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "hostName": { "value": "[variables('hostName')]" },
+                    "webApp": { "value": "[parameters('webApp')]" }
+                }
+            }
+        },
+        { // justbeawesomeat-net
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2019-10-01",
+            "name": "[variables('certificateName')]",
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[concat(parameters('templatesStorage').location, '/', variables('certificatTemplate'), parameters('templatesStorage').sasToken)]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "resourceName": { "value": "[variables('certificateName')]" },
+                    "location": { "value": "[parameters('location')]" },
+                    "keyVault": { "value": "[parameters('keyVault')]" },
+                    "secretName": { "value": "[variables('kvSecretName')]" },
+                    "serverFarm": { "value": "[parameters('serverFarm')]" }
+                }
+            }
+        },
+        { // justbeawesomeat.net ssl state
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2019-10-01",
+            "dependsOn": [
+                "[variables('hostNameBindingName')]",
+                "[variables('certificateName')]"               
+            ],
+            "name": "[variables('hostNameSslStateName')]",
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[concat(parameters('templatesStorage').location, '/', variables('hostNameSslStateTemplate'), parameters('templatesStorage').sasToken)]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {                    
+                    "location": { "value": "[parameters('location')]" },
+                    "webApp": { "value": "[parameters('keyVault')]" },
+                    "hostNameBinding": { "value": "[reference(variables('hostNameBindingName')).outputs.resource.value]" },
+                    "certificate": { "value": "[reference(variables('certificateName')).outputs.resource.value]" }                  
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,42 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "resourceName": {
+            "type": "string"
+        },
+        "location": {
+            "type": "string"
+        },
+        "keyVault": {
+            "type": "object"
+        },
+        "secretName": {
+            "type": "string"
+        },
+        "serverFarm": {
+            "type": "object"
+        }
+    },
+    "resources": [
+        {
+            "type": "Microsoft.Web/certificates",
+            "name": "[parameters('resourceName')]",
+            "apiVersion": "2019-08-01",
+            "location": "[parameters('location')]",
+            "properties": {
+                "keyVaultId": "[parameters('KeyVault').resourceId]",
+                "keyVaultSecretName": "[parameters('secretName')]",
+                "serverFarmId": "[parameters('serverFarm').resourceId]"
+            }
+        }
+    ],
+    "outputs": {
+        "resource": {
+            "type": "object",
+            "value": {
+                "Thumbprint": "[reference(parameters('resourceName')).Thumbprint]"
+            }
+        }
+    }
+}

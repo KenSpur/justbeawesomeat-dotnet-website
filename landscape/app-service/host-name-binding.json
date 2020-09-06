@@ -1,0 +1,36 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "hostName": {
+            "type": "string"
+        },
+        "webApp": {
+            "type": "object"
+        }
+    },
+    "functions": [],
+    "variables": {
+        "hostNameBindingsName": "[concat(parameters('webApp').name, '/', parameters('hostName'))]"
+    },
+    "resources": [
+       {
+            "type": "Microsoft.Web/sites/hostNameBindings",
+            "apiVersion": "2018-11-01",
+            "name": "[variables('hostNameBindingsName')]",
+            "location": "West Europe",
+            "properties": {
+                "siteName": "[parameters('webApp').name]",
+                "hostNameType": "Verified"
+            }
+        }
+    ],
+    "outputs": {
+        "resource": {
+            "type": "object",
+            "value": {
+                "hostName": "[parameters('hostName')]"
+            }
+        }
+    }
+}

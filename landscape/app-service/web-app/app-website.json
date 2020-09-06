@@ -13,7 +13,7 @@
         }
     },
     "resources": [
-      {
+        {
             "apiVersion": "2018-11-01",
             "type": "Microsoft.Web/sites",
             "name": "[parameters('resourceName')]",
@@ -23,5 +23,14 @@
                 "serverFarmId": "[parameters('appServicePlanId')]"
             }
         }
-    ]
+    ],
+    "outputs": {
+        "resource": {
+            "type": "object",
+            "value": {
+                "name":  "[parameters('resourceName')]",
+                "resourceId": "[resourceId('Microsoft.Web/sites', parameters('resourceName'))]"
+            }
+        }
+    }
 }

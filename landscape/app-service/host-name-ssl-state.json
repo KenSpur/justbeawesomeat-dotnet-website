@@ -1,0 +1,37 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "location": {
+            "type": "string"
+        },
+        "webApp": {
+            "type": "object"
+        },
+        "certificate": {
+            "type": "object"
+        },
+        "hostNameBinding": {
+            "type": "object"
+        }
+    },
+    "resources": [
+        {
+            "type": "Microsoft.Web/sites",
+            "name": "[parameters('webApp').name]",
+            "apiVersion": "2019-08-01",
+            "location": "[parameters('location')]",
+            "properties": {
+                "name": "[parameters('webApp').name]",
+                "hostNameSslStates": [
+                    {
+                        "name": "[parameters('hostNameBinding').hostName]",
+                        "sslState": "SniEnabled",
+                        "thumbprint": "[parameters('certificate').Thumbprint]",
+                        "toUpdate": true
+                    }
+                ]
+            }
+        }
+    ]
+}

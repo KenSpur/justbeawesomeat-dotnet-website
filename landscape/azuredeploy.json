@@ -35,12 +35,14 @@
         "aspWebsiteTemplate": "asp-website.json",
         "appWebsiteTemplate": "app-website.json",
         "acmeBotFunctionDeployTemplate": "fn-acme-bot-website-deploy.json",
+        "dnsDeployTemplate": "dns-deploy.json",
         "appiWebsiteName": "[concat('appi-', parameters('resourceName').infix, '-', parameters('environment'), '-', parameters('resourceName').locationSuffix)]",
         "kvWebsiteName": "[concat('kv-', parameters('resourceName').infix, '-', parameters('environment'), '-', parameters('resourceName').locationSuffix)]",
         "stWebsiteName": "[concat('st', parameters('resourceName').infix, parameters('environment'), parameters('resourceName').locationSuffix)]",
         "aspWebsiteName": "[concat('asp-', parameters('resourceName').infix, '-', parameters('environment'), '-', parameters('resourceName').locationSuffix)]",
         "appWebsiteName": "[concat('app-', parameters('resourceName').infix, '-', parameters('environment'), '-', parameters('resourceName').locationSuffix)]",
-        "acmeBotFunctionDeployName": "fn-acme-bot-deploy"
+        "acmeBotFunctionDeployName": "fn-acme-bot-deploy",
+        "dnsDeployName": "dns-deploy"
     },
     "resources": [
         { // appi-website-env-location
@@ -156,6 +158,33 @@
                     "appInsights": { "value": "[reference(variables('appiWebsiteName')).outputs.resource.value]" },
                     "acmeBot": { "value": "[parameters('acmeBot')]" },
                     "keyVault": { "value": "[reference(variables('kvWebsiteName')).outputs.resource.value]" }
+                }
+            }
+        },
+        { // fn-acme-bot-deploy
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2019-10-01",
+            "condition": "[equals(parameters('environment'), 'prod')]",
+            "dependsOn": [
+                "[variables('appWebsiteName')]",
+                "[variables('aspWebsiteName')]",
+                "[variables('kvWebsiteName')]",
+                "[variables('acmeBotFunctionDeployName')]"
+            ],
+            "name": "[variables('dnsDeployName')]",
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[concat(parameters('templatesStorage').location, '/', variables('dnsDeployTemplate'), parameters('templatesStorage').sasToken)]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "resourceName": { "value": "[parameters('resourceName')]" },  
+                    "templatesStorage": { "value": "[parameters('templatesStorage')]" },                
+                    "location": { "value": "[parameters('location')]" },
+                    "webApp": { "value": "[reference(variables('appWebsiteName')).outputs.resource.value]" },
+                    "keyVault": { "value": "[reference(variables('kvWebsiteName')).outputs.resource.value]" },
+                    "serverFarm": { "value": "[reference(variables('aspWebsiteName')).outputs.resource.value]" }
                 }
             }
         }
