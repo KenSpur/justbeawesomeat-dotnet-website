@@ -35,7 +35,7 @@
                     },
                     {
                         "name": "AzureStorage__ConnectionString",
-                        "value": "[concat('DefaultEndpointsProtocol=https;AccountName=', parameters('storageAccount').name, ';AccountKey=', parameters('storageAccount').keys[0].value, ';EndpointSuffix=', environment().suffixes.storage)]"
+                        "value": "[concat('DefaultEndpointsProtocol=https;AccountName=', parameters('storageAccount').name, ';AccountKey=', parameters('storageAccount').keys[0].value, ';BlobEndpoint=https://', parameters('storageAccount').name, '.blob.core.windows.net/')]"
                     },
                     {
                         "name": "AzureStorage__WebsitePageDataContainer",
