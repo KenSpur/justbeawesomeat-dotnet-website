@@ -12,14 +12,30 @@
             "type": "string"
         }
     },
+    "variables": {
+        "websitePageDataContainerName": "WebsitePageData"
+    },
     "resources": [
-         {
+        {
             "type": "Microsoft.Storage/storageAccounts",
             "name": "[parameters('resourceName')]",
             "apiVersion": "2019-06-01",
             "location": "[parameters('location')]",
+            "sku": { "name": "[parameters('sku')]" },
             "kind": "StorageV2",
-            "sku": { "name": "[parameters('sku')]" }
+            "resources": [
+                {
+                    "type": "blobServices/containers",
+                    "apiVersion": "2019-06-01",
+                    "name": "[concat('default/', variables('websitePageDataContainerName'))]",
+                    "dependsOn": [
+                        "[parameters('resourceName')]"
+                    ],
+                    "properties": {
+                        "publicAccess": "Container"
+                    }
+                }
+            ]
         }
     ],
     "outputs": {
@@ -28,7 +44,8 @@
             "value": {
                 "name": "[parameters('resourceName')]",
                 "resourceId": "[resourceId('Microsoft.Storage/storageAccounts', parameters('resourceName'))]",
-                "keys": "[listKeys(resourceId('Microsoft.Storage/storageAccounts', parameters('resourceName')), '2018-11-01').keys]"
+                "keys": "[listKeys(resourceId('Microsoft.Storage/storageAccounts', parameters('resourceName')), '2018-11-01').keys]",
+                "websitePageDataContainerName": "[variables('websitePageDataContainerName')]"
             }
         }
     }

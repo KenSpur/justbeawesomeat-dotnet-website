@@ -54,11 +54,13 @@ jobs:
           - powershell: |
               $outputs = ConvertFrom-Json '$(templateOutputs)'
               Write-Host "##vso[task.setvariable variable=webAppName;]$($outputs.webApp.value.name)"
-            displayName: Extract web app name from template outputs
+            displayName: Extract Template Outputs
 
           - task: AzureWebApp@1
             displayName: 'Deploy Azure Web App'
             inputs:
-                azureSubscription: ${{ parameters.serviceConnection }}
-                package: '$(Pipeline.Workspace)/drop/Release.Application.Server.zip'
-                appName: $(webAppName)
+              azureSubscription: ${{ parameters.azureServiceCollection }}
+              package: '$(Pipeline.Workspace)/drop/Release.Application.Server.zip'
+              appName: $(webAppName)
+            env:
+              SendGrid__ApiKey: $(SendGridApiKey)

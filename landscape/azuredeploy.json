@@ -98,7 +98,7 @@
         },
         { // asp-website-env-location
             "type": "Microsoft.Resources/deployments",
-            "apiVersion": "2019-10-01",
+            "apiVersion": "2019-10-01",           
             "name": "[variables('aspWebsiteName')]",
             "properties": {
                 "mode": "Incremental",
@@ -116,7 +116,11 @@
         { // app-website-env-location
             "type": "Microsoft.Resources/deployments",
             "apiVersion": "2019-10-01",
-            "dependsOn": [ "[variables('aspWebsiteName')]" ],
+            "dependsOn": [ 
+                "[variables('aspWebsiteName')]",
+                "[variables('appiWebsiteName')]",
+                "[variables('stWebsiteName')]"
+            ],
             "name": "[variables('appWebsiteName')]",
             "properties": {
                 "mode": "Incremental",
@@ -127,7 +131,9 @@
                 "parameters": {
                     "resourceName": { "value": "[variables('appWebsiteName')]" },
                     "location": { "value": "[parameters('location')]" },
-                    "appServicePlanId": { "value": "[reference(variables('aspWebsiteName')).outputs.resource.value.resourceId]" }
+                    "serverFarm": { "value": "[reference(variables('aspWebsiteName')).outputs.resource.value]" },
+                    "appInsights": { "value": "[reference(variables('appiWebsiteName')).outputs.resource.value]" },
+                    "storageAccount": { "value": "[reference(variables('stWebsiteName')).outputs.resource.value]" }
                 }
             }
         },

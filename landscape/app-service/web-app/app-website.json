@@ -8,8 +8,14 @@
         "location": {
             "type": "string"
         },
-        "appServicePlanId": {
-            "type": "string"
+         "serverFarm": {
+            "type": "object"
+        },
+        "appInsights": {
+          "type": "object"  
+        },    
+        "storageAccount": {
+            "type": "object"
         }
     },
     "resources": [
@@ -20,8 +26,22 @@
             "location": "[parameters('location')]",
             "kind": "app",
             "properties": {
-                "serverFarmId": "[parameters('appServicePlanId')]",
-                "httpsOnly": true
+                "serverFarmId": "[parameters('serverFarm').resourceId]",
+                "httpsOnly": true,
+                "appSettings": [
+                    {
+                        "name": "AppInsights__InstrumentationKey",
+                        "value": "[parameters('appInsights').InstrumentationKey]"
+                    },
+                    {
+                        "name": "AzureStorage__ConnectionString",
+                        "value": "[concat('DefaultEndpointsProtocol=https;AccountName=', parameters('storageAccount').name, ';AccountKey=', parameters('storageAccount').keys[0].value, ';EndpointSuffix=', environment().suffixes.storage)]"
+                    },
+                    {
+                        "name": "AzureStorage__WebsitePageDataContainer",
+                        "value": "[parameters('storageAccount').websitePageDataContainerName]"
+                    }
+                ]
             }
         }
     ],
