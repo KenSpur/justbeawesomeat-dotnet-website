@@ -34,7 +34,7 @@
           "tenantId": "[parameters('tenantId')]",
           "accessPolicies": [
             { // Microsoft Azure App Service
-              "tenantId": "[subscription().subscriptionId]",
+              "tenantId": "[parameters('tenantId')]",
               "objectId": "763658de-692f-4fef-8da0-0e846d77c926",
               "permissions": {
                   "keys": [],
