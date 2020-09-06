@@ -14,6 +14,9 @@
         "templatesStorage": {
             "value": {}
         },
+        "sendGridApiKey":{
+            "value": ""
+        },
         "aspWebsite": {
             "value": {
                 "sku": "F1"

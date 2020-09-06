@@ -37,57 +37,57 @@
             "properties": {
                 "serverFarmId": "[parameters('serverFarm').resourceId]",
                 "siteConfig": {
-                "appSettings": [
-                    {
-                        "name": "APPLICATIONINSIGHTS_CONNECTION_STRING",
-                        "value": "[concat('InstrumentationKey=', parameters('appInsights').InstrumentationKey, ';EndpointSuffix=', parameters('appInsights').endpoint)]"
-                    },
-                    {
-                        "name": "AzureWebJobsStorage",
-                        "value": "[concat('DefaultEndpointsProtocol=https;AccountName=', parameters('storageAccount').name, ';AccountKey=', parameters('storageAccount').keys[0].value, ';EndpointSuffix=', environment().suffixes.storage)]"
-                    },
-                    {
-                        "name": "WEBSITE_CONTENTAZUREFILECONNECTIONSTRING",
-                        "value": "[concat('DefaultEndpointsProtocol=https;AccountName=', parameters('storageAccount').name, ';AccountKey=', parameters('storageAccount').keys[0].value, ';EndpointSuffix=', environment().suffixes.storage)]"
-                    },
-                    {
-                        "name": "WEBSITE_CONTENTSHARE",
-                        "value": "[toLower(parameters('resourceName'))]"
-                    },
-                    {
-                        "name": "WEBSITE_RUN_FROM_PACKAGE",
-                        "value": "https://shibayan.blob.core.windows.net/azure-keyvault-letsencrypt/v3/latest.zip"
-                    },
-                    {
-                        "name": "FUNCTIONS_EXTENSION_VERSION",
-                        "value": "~3"
-                    },
-                    {
-                        "name": "FUNCTIONS_WORKER_RUNTIME",
-                        "value": "dotnet"
-                    },
-                    {
-                        "name": "Acmebot:AzureDns:SubscriptionId",
-                        "value": "[subscription().subscriptionId]"
-                    },
-                    {
-                        "name": "Acmebot:Contacts",
-                        "value": "[parameters('acmeBot').mailAddress]"
-                    },
-                    {
-                        "name": "Acmebot:Endpoint",
-                        "value": "[parameters('acmeBot').endpoint]"
-                    },
-                    {
-                        "name": "Acmebot:VaultBaseUrl",
-                        "value": "[parameters('keyVault').vaultUri]"
-                    },
-                    {
-                        "name": "Acmebot:Environment",
-                        "value": "[environment().name]"
-                    }
-                ],
-                "clientAffinityEnabled": false
+                    "appSettings": [
+                        {
+                            "name": "APPLICATIONINSIGHTS_CONNECTION_STRING",
+                            "value": "[concat('InstrumentationKey=', parameters('appInsights').InstrumentationKey, ';EndpointSuffix=', parameters('appInsights').endpoint)]"
+                        },
+                        {
+                            "name": "AzureWebJobsStorage",
+                            "value": "[concat('DefaultEndpointsProtocol=https;AccountName=', parameters('storageAccount').name, ';AccountKey=', parameters('storageAccount').keys[0].value, ';EndpointSuffix=', environment().suffixes.storage)]"
+                        },
+                        {
+                            "name": "WEBSITE_CONTENTAZUREFILECONNECTIONSTRING",
+                            "value": "[concat('DefaultEndpointsProtocol=https;AccountName=', parameters('storageAccount').name, ';AccountKey=', parameters('storageAccount').keys[0].value, ';EndpointSuffix=', environment().suffixes.storage)]"
+                        },
+                        {
+                            "name": "WEBSITE_CONTENTSHARE",
+                            "value": "[toLower(parameters('resourceName'))]"
+                        },
+                        {
+                            "name": "WEBSITE_RUN_FROM_PACKAGE",
+                            "value": "https://shibayan.blob.core.windows.net/azure-keyvault-letsencrypt/v3/latest.zip"
+                        },
+                        {
+                            "name": "FUNCTIONS_EXTENSION_VERSION",
+                            "value": "~3"
+                        },
+                        {
+                            "name": "FUNCTIONS_WORKER_RUNTIME",
+                            "value": "dotnet"
+                        },
+                        {
+                            "name": "Acmebot:AzureDns:SubscriptionId",
+                            "value": "[subscription().subscriptionId]"
+                        },
+                        {
+                            "name": "Acmebot:Contacts",
+                            "value": "[parameters('acmeBot').mailAddress]"
+                        },
+                        {
+                            "name": "Acmebot:Endpoint",
+                            "value": "[parameters('acmeBot').endpoint]"
+                        },
+                        {
+                            "name": "Acmebot:VaultBaseUrl",
+                            "value": "[parameters('keyVault').vaultUri]"
+                        },
+                        {
+                            "name": "Acmebot:Environment",
+                            "value": "[environment().name]"
+                        }
+                    ],
+                    "clientAffinityEnabled": false
                 }
             },
             "resources": [

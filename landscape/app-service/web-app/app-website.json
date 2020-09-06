@@ -12,10 +12,13 @@
             "type": "object"
         },
         "appInsights": {
-          "type": "object"  
+            "type": "object"  
         },    
         "storageAccount": {
             "type": "object"
+        },
+        "sendGridApiKey": {
+            "type": "string"
         }
     },
     "resources": [
@@ -28,20 +31,26 @@
             "properties": {
                 "serverFarmId": "[parameters('serverFarm').resourceId]",
                 "httpsOnly": true,
-                "appSettings": [
-                    {
-                        "name": "AppInsights__InstrumentationKey",
-                        "value": "[parameters('appInsights').InstrumentationKey]"
-                    },
-                    {
-                        "name": "AzureStorage__ConnectionString",
-                        "value": "[concat('DefaultEndpointsProtocol=https;AccountName=', parameters('storageAccount').name, ';AccountKey=', parameters('storageAccount').keys[0].value, ';BlobEndpoint=https://', parameters('storageAccount').name, '.blob.core.windows.net/')]"
-                    },
-                    {
-                        "name": "AzureStorage__WebsitePageDataContainer",
-                        "value": "[parameters('storageAccount').websitePageDataContainerName]"
-                    }
-                ]
+                "siteConfig": {
+                    "appSettings": [
+                        {
+                            "name": "AppInsights__InstrumentationKey",
+                            "value": "[parameters('appInsights').InstrumentationKey]"
+                        },
+                        {
+                            "name": "AzureStorage__ConnectionString",
+                            "value": "[concat('DefaultEndpointsProtocol=https;AccountName=', parameters('storageAccount').name, ';AccountKey=', parameters('storageAccount').keys[0].value, ';BlobEndpoint=https://', parameters('storageAccount').name, '.blob.core.windows.net/')]"
+                        },
+                        {
+                            "name": "AzureStorage__WebsitePageDataContainer",
+                            "value": "[parameters('storageAccount').websitePageDataContainerName]"
+                        },
+                        {
+                            "name": "SendGrid__ApiKey",
+                            "value": "[parameters('sendGridApiKey')]"
+                        }
+                    ]
+                }
             }
         }
     ],

@@ -15,6 +15,9 @@
         "templatesStorage": {
             "type": "secureObject"
         },
+        "sendGridApiKey": {
+            "type": "string"
+        },
         "aspWebsite": {
             "type": "object"
         },
@@ -133,7 +136,8 @@
                     "location": { "value": "[parameters('location')]" },
                     "serverFarm": { "value": "[reference(variables('aspWebsiteName')).outputs.resource.value]" },
                     "appInsights": { "value": "[reference(variables('appiWebsiteName')).outputs.resource.value]" },
-                    "storageAccount": { "value": "[reference(variables('stWebsiteName')).outputs.resource.value]" }
+                    "storageAccount": { "value": "[reference(variables('stWebsiteName')).outputs.resource.value]" },
+                    "sendgridApiKey": { "value": "[parameters('sendgridApiKey')]" }
                 }
             }
         },

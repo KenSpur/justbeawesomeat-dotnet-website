@@ -48,6 +48,7 @@ jobs:
               overrideParameters: >
                 -resourceName { "infix": "$(ResourceNameInfix)", "locationSuffix": "$(LocationSuffix)" }
                 -templatesStorage { "location": "$(TemplatesStorageLocation)", "sasToken": "$(TemplateStorageContainerSasToken)" }
+                -sendGridApiKey $(SendGridApiKey)
               deploymentMode: 'Incremental'
               deploymentOutputs: templateOutputs
 
@@ -62,5 +63,3 @@ jobs:
               azureSubscription: ${{ parameters.azureServiceCollection }}
               package: '$(Pipeline.Workspace)/drop/Release/Application.Server.zip'
               appName: $(webAppName)
-            env:
-              SendGrid__ApiKey: $(SendGridApiKey)
