@@ -35,7 +35,6 @@ stages:
           - template: build-application.yml
             parameters:
               buildConfiguration: 'Release'
-              dotnetSdkVersion: '3.1.201'
               project: '**/Application.Server.csproj'
 
           - task: PublishBuildArtifacts@1
@@ -61,7 +60,7 @@ stages:
       and(succeeded(), 
         or(
           eq(variables['Build.SourceBranch'], 'refs/heads/master'),
-          eq(variables['Build.SourceBranch'], 'refs/heads/hotfix/*')
+          contains(variables['Build.SourceBranch'], 'refs/heads/hotfix/')
         )
       )
     jobs:
